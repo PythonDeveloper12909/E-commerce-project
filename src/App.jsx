@@ -1,7 +1,7 @@
 import './index.css'
 import {Routes,Route} from 'react-router'
-import Home from './Home.jsx'
-import Cart from './Cart.jsx'
+import Home from './pages/Home.jsx'
+import Cart from './pages/Cart.jsx'
 function App() {
    return( 
     <Routes>
