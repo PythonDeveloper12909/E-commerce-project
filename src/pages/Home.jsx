@@ -1,19 +1,20 @@
+import { useState } from "react";
 import Products from './Products.jsx'
-function Home(){
-  return(
+function Home() {
+  return (
     <>
       <nav>
-          <h1 className='title'>Ecommerce Website</h1>
-          <div className='input-container'>
-            <input type="text" placeholder='Search for items..' className='inp'/>
-            <button className='butt'>Submit</button>
-          </div>
-          <ul className='container'>
-            <li className='li'>Orders</li>
-            <li className='li'>Cart</li>
-          </ul>
+        <h1 className='title'>Ecommerce Website</h1>
+        <div className='input-container'>
+          <input type="text" placeholder='Search for items..' className='inp' />
+          <button className='butt'>Submit</button>
+        </div>
+        <ul className='container'>
+          <li className='li'>Orders</li>
+          <li className='li'><a href="/cart">🛒Cart</a></li>
+        </ul>
       </nav>
-      <Products/>
+      <Products />
     </>
   )
 }
