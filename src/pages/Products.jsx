@@ -9,13 +9,13 @@ function Products(){
       }, []);
     
       return (
-        <div className="grid grid-cols-4 gap-4">
+        <div className="product-container">
           {products.map(product => (
-            <div key={product.id} className="border p-3">
-              <img src={product.thumbnail} className="h-40 mx-auto" />
-              <h2>{product.title}</h2>
-              <p>${product.price}</p>
-            </div>
+              <div key={product.id} className="card">
+                <img src={product.thumbnail} className="img" />
+                <h2 className="name">{product.title}</h2>
+                <p className="price">${product.price}</p>
+              </div>
           ))}
         </div>
       );

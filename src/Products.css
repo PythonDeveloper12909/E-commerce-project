@@ -1,0 +1,15 @@
+.product-container{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: auto;
+}
+.card{
+    border: 1px solid hsl(0, 0%, 80%);
+}
+.name{
+    font-size: 2rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.img{
+    width: 200px;
+}

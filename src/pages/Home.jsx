@@ -4,10 +4,13 @@ function Home(){
     <>
       <nav>
           <h1 className='title'>Ecommerce Website</h1>
-          <input type="text" placeholder='Search for items..'/>
-          <ul>
-            <li>Orders</li>
-            <li>Cart</li>
+          <div className='input-container'>
+            <input type="text" placeholder='Search for items..' className='inp'/>
+            <button className='butt'>Submit</button>
+          </div>
+          <ul className='container'>
+            <li className='li'>Orders</li>
+            <li className='li'>Cart</li>
           </ul>
       </nav>
       <Products/>

@@ -1,3 +1,54 @@
+*{
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body,html{
+    width: 100%;
+    height: 100%;
+}
 .title{
-    font-size: 4rem;
+    font-size: 2rem;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-weight: 500;
+}
+nav{
+    background-color: darkgreen;
+    display: flex;
+    justify-content:space-around;
+    height: 50px;
+    align-items: center;
+}
+.inp{
+    font-size: 1rem;
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+}
+.li{
+    list-style: none;
+    color: white;
+    font-size: 1.5rem;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-weight: 700;
+}
+.container{
+    display: flex;
+    align-items: center;
+    gap:20px;
+}
+.input-container{
+    width: 50%;
+    height: 80%;
+    display: flex;
+    justify-content: center;
+}
+.butt{
+    background-color: lightgreen;
+    color: white;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 1rem;
 }
