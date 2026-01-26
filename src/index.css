@@ -14,11 +14,13 @@ body,html{
     font-weight: 500;
 }
 nav{
+    position: sticky;
     background-color: darkgreen;
     display: flex;
     justify-content:space-around;
-    height: 50px;
+    height: 60px;
     align-items: center;
+    top: 0;
 }
 .inp{
     font-size: 1rem;
