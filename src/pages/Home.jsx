@@ -1,6 +1,9 @@
-import { useState } from "react";
 import Products from './Products.jsx'
+import { createContext, useState } from 'react'
+export const api = createContext()
 function Home() {
+  const [count, setCount] = useState(0)
+
   return (
     <>
       <nav>
@@ -11,10 +14,12 @@ function Home() {
         </div>
         <ul className='container'>
           <li className='li'>Orders</li>
-          <li className='li'><a href="/cart">🛒Cart</a></li>
+          <li className='li'><a href="/cart">🛒Cart {count > 0 ? count : null}</a></li>
         </ul>
       </nav>
-      <Products />
+      <api.Provider value={{ count, setCount }}>
+        <Products />
+      </api.Provider>
     </>
   )
 }

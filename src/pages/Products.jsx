@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
-function Products({ count }) {
+import { useState, useEffect, useContext } from "react";
+import { api } from './Home.jsx'
+
+function Products() {
   const [products, setProducts] = useState([]);
-  const [count, setCount] = useState(0)
+  const { setCount } = useContext(api);
+  const [val, setVal] = useState(1)
+
   useEffect(() => {
     fetch("https://dummyjson.com/products?limit=100")
       .then(res => res.json())
@@ -9,31 +13,36 @@ function Products({ count }) {
   }, []);
 
   const updatecount = () => {
-    setCount(c => c + 1)
+    setCount(c => c + val)
+  }
+  const updateVal = (e) => {
+    setVal(Number(e.target.value))
   }
   return (
-    <div className="product-container">
-      {products.map(product => (
-        <div key={product.id} className="card">
-          <img src={product.thumbnail} className="img" />
-          <h2 className="name">{product.title}</h2>
-          <p className="price">${product.price}</p>
-          <select className="quantity">
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-          </select>
-          <button className="cart-butt" onClick={updatecount}>Add to cart</button>
-        </div>
-      ))}
-    </div>
+    <>
+      <div className="product-container">
+        {products.map(product => (
+          <div key={product.id} className="card">
+            <img src={product.thumbnail} className="img" />
+            <h2 className="name">{product.title}</h2>
+            <p className="price">${product.price}</p>
+            <select className="quantity" onChange={() => updateVal(product.id)}>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7</option>
+              <option>8</option>
+              <option>9</option>
+              <option>10</option>
+            </select>
+            <button className="cart-butt" onClick={updatecount}>Add to cart</button>
+          </div>
+        ))}
+      </div >
+    </>
   );
 }
 export default Products
