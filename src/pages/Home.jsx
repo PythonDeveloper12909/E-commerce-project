@@ -1,8 +1,9 @@
 import Products from './Products.jsx'
-import { createContext, useState } from 'react'
-export const api = createContext()
+import { useContext } from 'react'
+import { Link } from 'react-router-dom'
+import { StoreContext } from '../context/store.js'
 function Home() {
-  const [count, setCount] = useState(0)
+  const { count } = useContext(StoreContext)
 
   return (
     <>
@@ -14,12 +15,12 @@ function Home() {
         </div>
         <ul className='container'>
           <li className='li'>Orders</li>
-          <li className='li'><a href="/cart">🛒Cart {count > 0 ? count : null}</a></li>
+          <li className='li'>
+            <Link to="/cart">🛒Cart {count > 0 ? count : null}</Link>
+          </li>
         </ul>
       </nav>
-      <api.Provider value={{ count, setCount }}>
-        <Products />
-      </api.Provider>
+      <Products />
     </>
   )
 }

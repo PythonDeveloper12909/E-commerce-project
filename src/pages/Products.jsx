@@ -16,7 +16,8 @@ function Products() {
   //   setCount(c => c + val)
   // }
   const updateval = (index, e) => {
-    setVal(Number(products.map(i => index === i ? e.target.value : 1)))
+    const qty = Number(e.target.value)
+    setVal(qty)
     setCount(c => c + val)
   }
   return (
@@ -27,7 +28,7 @@ function Products() {
             <img src={product.thumbnail} className="img" />
             <h2 className="name">{product.title}</h2>
             <p className="price">${product.price}</p>
-            <select className="quantity" onChange={(e) => updateval(index, e)}>
+            <select className="quantity" onChange={() => updateval(index)}>
               <option>1</option>
               <option>2</option>
               <option>3</option>
