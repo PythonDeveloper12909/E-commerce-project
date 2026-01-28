@@ -12,12 +12,12 @@ function Products() {
       .then(data => setProducts(data.products));
   }, []);
 
-  const updatecount = () => {
+  // const updatecount = () => {
+  //   setCount(c => c + val)
+  // }
+  const updateval = (index, e) => {
+    setVal(Number(products.map(i => index === i ? e.target.value : 1)))
     setCount(c => c + val)
-  }
-  const updateval = (e, index) => {
-    // setVal(Number(e.target.value))
-    setVal(Number(products.map((product) => product.id === index ? e.target.value : 1)))
   }
   return (
     <>
@@ -27,7 +27,7 @@ function Products() {
             <img src={product.thumbnail} className="img" />
             <h2 className="name">{product.title}</h2>
             <p className="price">${product.price}</p>
-            <select className="quantity" onChange={() => updateval(index)}>
+            <select className="quantity" onChange={(e) => updateval(index, e)}>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -39,7 +39,7 @@ function Products() {
               <option>9</option>
               <option>10</option>
             </select>
-            <button className="cart-butt" onClick={updatecount}>Add to cart</button>
+            <button className="cart-butt" >Add to cart</button>
           </div>
         ))}
       </div >
