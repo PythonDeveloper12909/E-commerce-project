@@ -15,18 +15,19 @@ function Products() {
   const updatecount = () => {
     setCount(c => c + val)
   }
-  const updateVal = (e) => {
-    setVal(Number(e.target.value))
+  const updateval = (e, index) => {
+    // setVal(Number(e.target.value))
+    setVal(Number(products.map((product) => product.id === index ? e.target.value : 1)))
   }
   return (
     <>
       <div className="product-container">
-        {products.map(product => (
+        {products.map((product, index) => (
           <div key={product.id} className="card">
             <img src={product.thumbnail} className="img" />
             <h2 className="name">{product.title}</h2>
             <p className="price">${product.price}</p>
-            <select className="quantity" onChange={() => updateVal(product.id)}>
+            <select className="quantity" onChange={() => updateval(index)}>
               <option>1</option>
               <option>2</option>
               <option>3</option>
