@@ -5,19 +5,14 @@ function Products() {
   const [products, setProducts] = useState([]);
   const { setCount } = useContext(api);
   const [val, setVal] = useState(1)
-
   useEffect(() => {
     fetch("https://dummyjson.com/products?limit=100")
       .then(res => res.json())
       .then(data => setProducts(data.products));
   }, []);
 
-  // const updatecount = () => {
-  //   setCount(c => c + val)
-  // }
-  const updateval = (index, e) => {
-    const qty = Number(e.target.value)
-    setVal(qty)
+  const updatecount = (index) => {
+    // setVal(products.map((e, i) => index === i ? e.target.value : 1))
     setCount(c => c + val)
   }
   return (
@@ -28,7 +23,7 @@ function Products() {
             <img src={product.thumbnail} className="img" />
             <h2 className="name">{product.title}</h2>
             <p className="price">${product.price}</p>
-            <select className="quantity" onChange={() => updateval(index)}>
+            <select className="quantity" onChange={(e) => products.map((_, i) => index !== i ? setVal(Number(e.target.value)) : setVal(1))}>
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -40,9 +35,10 @@ function Products() {
               <option>9</option>
               <option>10</option>
             </select>
-            <button className="cart-butt" >Add to cart</button>
-          </div>
-        ))}
+            <button className="cart-butt" onClick={() => updatecount(index)}>Add to cart</button>
+          </div >
+        ))
+        }
       </div >
     </>
   );
