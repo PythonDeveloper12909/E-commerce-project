@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from "react";
 import { api } from '../Context.jsx'
-
 function Products() {
   const [products, setProducts] = useState([]);
   const { setCount } = useContext(api);
@@ -12,8 +11,8 @@ function Products() {
       .then(data => setProducts(data.products));
   }, []);
 
-  const updatecount = (index) => {
-    const quantity = val[index] || 1
+  const updatecount = (id) => {
+    const quantity = val[id] || 1
     setCount(c => c + quantity)
   }
   return (
@@ -24,7 +23,7 @@ function Products() {
             <img src={product.thumbnail} className="img" />
             <h2 className="name">{product.title}</h2>
             <p className="price">${product.price}</p>
-            <select className="quantity" onChange={(e) => setVal(prev => ({ ...prev, [index]: Number(e.target.value) }))} >
+            <select className="quantity" onChange={(e) => setVal(prev => ({ ...prev, [product.id]: Number(e.target.value) }))} >
               <option>1</option>
               <option>2</option>
               <option>3</option>
@@ -36,7 +35,7 @@ function Products() {
               <option>9</option>
               <option>10</option>
             </select>
-            <button className="cart-butt" onClick={() => updatecount(index)}>Add to cart</button>
+            <button className="cart-butt" onClick={() => updatecount(product.id)}>Add to cart</button>
           </div >
         ))}
       </div >
