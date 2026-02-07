@@ -4,7 +4,7 @@ import {inputvalue} from './Home.jsx'
 function Products() { 
   const [products, setProducts] = useState([]);
   const { setCount } = useContext(api);
-  // const {inpval}=useContext(inputvalue)
+  const {inpval,setInpval}=useContext(inputvalue)
   const [val, setVal] = useState({});
 
   useEffect(() => {
