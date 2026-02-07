@@ -1,8 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import { api } from '../Context.jsx'
-function Products() {
+import {inputvalue} from './Home.jsx'
+function Products() { 
   const [products, setProducts] = useState([]);
   const { setCount } = useContext(api);
+  // const {inpval}=useContext(inputvalue)
   const [val, setVal] = useState({});
 
   useEffect(() => {
@@ -18,7 +20,7 @@ function Products() {
   return (
     <>
       <div className="product-container">
-        {products.map((product, index) => (
+        {products.map(product => (
           <div key={product.id} className="card" >
             <img src={product.thumbnail} className="img" />
             <h2 className="name">{product.title}</h2>
@@ -38,8 +40,9 @@ function Products() {
             <button className="cart-butt" onClick={() => updatecount(product.id)}>Add to cart</button>
           </div >
         ))}
-      </div >
+        </div>
     </>
+    
   );
 }
 export default Products

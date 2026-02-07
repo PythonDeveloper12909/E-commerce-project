@@ -1,16 +1,17 @@
 import Products from './Products.jsx'
-import { useContext, useState } from 'react'
+import { useContext, useState,createContext } from 'react'
 import { api } from '../Context.jsx'
 import { Link } from 'react-router-dom'
-
+export const inputvalue=createContext()
 function Home() {
   const { count, setCount } = useContext(api)
+  const [inpval,setInpval]=useState()
   return (
     <>
       <nav>
         <h1 className='title'>Ecommerce Website</h1>
         <div className='input-container'>
-          <input type="text" placeholder='Search for items..' className='inp' />
+          <input type="text" placeholder='Search for items..' className='inp' value={inpval}/>
           <button className='butt'>Submit</button>
         </div>
         <ul className='container'>
@@ -19,6 +20,9 @@ function Home() {
         </ul>
       </nav>
       <Products />
+      <inputvalue.Provider value={{inpval,setInpval}}>
+              <Products />
+      </inputvalue.Provider>
     </>
   )
 }
