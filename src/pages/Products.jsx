@@ -21,9 +21,10 @@ function Products() {
     <>
       <div className="product-container">
         {products.map(product => (
-          <div key={product.id} className="card" >
+          product.title.toLowerCase().includes(inpval.toLowerCase()) ?
+          (<div key={product.id} className="card" >
             <img src={product.thumbnail} className="img" />
-            <h2 className="name">{product.title}</h2>
+            <h2 className="name">{product.title.toLowerCase().includes(inpval.toLowerCase()) ? product.title : 'NO'}</h2>
             <p className="price">${product.price}</p>
             <select className="quantity" onChange={(e) => setVal(prev => ({ ...prev, [product.id]: Number(e.target.value) }))} >
               <option>1</option>
@@ -38,8 +39,8 @@ function Products() {
               <option>10</option>
             </select>
             <button className="cart-butt" onClick={() => updatecount(product.id)}>Add to cart</button>
-          </div >
-        ))}
+          </div >):(null)
+      ))}
         </div>
     </>
     

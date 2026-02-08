@@ -6,13 +6,17 @@ export const inputvalue=createContext()
 function Home() {
   const { count, setCount } = useContext(api)
   const [inpval,setInpval]=useState('')
+  const [actinpval,setActinpval]=useState('')
+  const change=()=>{
+    setInpval(actinpval)
+  }
   return (
     <>
       <nav>
         <h1 className='title'>Ecommerce Website</h1>
         <div className='input-container'>
-          <input type="text" placeholder='Search for items..' className='inp' onChange={(e)=>setInpval(e.target.value)}/>
-          <button className='butt'>Submit</button>
+          <input type="text" placeholder='Search for items..' className='inp' onChange={(e)=>setActinpval(e.target.value)} onKeyDown={(e)=>e.key=='Enter' && change()}/>
+          <button className='butt' onClick={()=>change()}>Submit</button>
         </div>
         <ul className='container'>
           <li className='li'>Orders</li>
