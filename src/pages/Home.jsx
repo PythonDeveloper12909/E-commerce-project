@@ -4,7 +4,7 @@ import { api } from '../Context.jsx'
 import { Link } from 'react-router-dom'
 export const inputvalue=createContext()
 function Home() {
-  const { count, setCount } = useContext(api)
+  const { count} = useContext(api)
   const [inpval,setInpval]=useState('')
   const [actinpval,setActinpval]=useState('')
   const change=()=>{

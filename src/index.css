@@ -97,3 +97,10 @@ a {
         font-size: 1rem;
     }
 }
+.no-products{
+    font-size: 2rem;
+    width: 100vw;
+    text-align: center;
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+}
