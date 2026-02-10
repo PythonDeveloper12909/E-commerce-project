@@ -1,10 +1,10 @@
 import './cart.css'
 import { useContext } from 'react'
 import { api,cartapi} from '../Context.jsx'
-import Products from './Products.jsx';
 function Cart() {
     const { count } = useContext(api);
-    const {cart}=useContext(cartapi)
+    const {cart}=useContext(cartapi);
+    // const {qty}=useContext(quantity);
     return (
         <div className="cart-page">
             {count > 0 ? <h1 className='orders'>Your Orders ({count})</h1>
