@@ -1,13 +1,12 @@
 import { useState, useEffect, useContext} from "react";
-import { api,cartapi,quantity} from '../Context.jsx'
+import { api,cartapi} from '../Context.jsx'
 import {inputvalue} from './Home.jsx'
 function Products() { 
   const [products, setProducts] = useState([]);
   const { setCount } = useContext(api);
   const {inpval}=useContext(inputvalue)
   const [val, setVal] = useState({});
-  const {setCart}=useContext(cartapi)
-  const {qty,setQty}=useContext(quantity)
+  const {cart,setCart}=useContext(cartapi)
   useEffect(() => {
     fetch("https://dummyjson.com/products?limit=100")
       .then(res => res.json())
@@ -15,9 +14,9 @@ function Products() {
   }, []);
 
   const updatecount = (id,product) => {
-    const quantities = val[id] || 1
-    setCount(c => c + quantities)
-    setQty(q=>[...q,quantities])
+    const quantity = val[id] || 1
+    setCount(c => c + quantity)
+    product.qty=quantity
     setCart(c=>[...c,product])
   }
   const filteredproducts=products.filter(product=>product.title.toLowerCase().includes(inpval.toLowerCase()))
