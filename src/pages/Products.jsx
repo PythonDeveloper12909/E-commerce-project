@@ -17,7 +17,10 @@ function Products() {
     const quantity = val[id] || 1
     setCount(c => c + quantity)
     product.qty=quantity
-    setCart(c=>[...c,product])
+    cart.includes(product) ? (()=>setCart(cart.filter((_,i)=>id!==i))) : setCart(prevcart=>[...prevcart,product])
+    // console.log(product)
+    console.log(cart)
+    console.log(quantity)
   }
   const filteredproducts=products.filter(product=>product.title.toLowerCase().includes(inpval.toLowerCase()))
   
@@ -30,7 +33,7 @@ function Products() {
             <img src={product.thumbnail} className="img" />
             <h2 className="name">{product.title}</h2>
             <p className="price">${product.price}</p>
-            <select className="quantity" onChange={(e) => setVal(prev => ({ ...prev, [product.id]: Number(e.target.value) }))} >
+            <select className="quantity" onChange={(e) => setVal(prev => ({ ...prev, [product.id]: Number(e.target.value) }))}>
               <option>1</option>
               <option>2</option>
               <option>3</option>
