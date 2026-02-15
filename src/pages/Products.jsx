@@ -15,13 +15,27 @@ function Products() {
 
   const updatecount = (id,product) => {
     const quantity = val[id] || 1
-    setCount(c => c + quantity)
     product.qty=quantity
-    cart.includes(product) ? (()=>setCart(cart.filter((_,i)=>id!==i))) : setCart(prevcart=>[...prevcart,product])
+    const alreadproduct=cart.find(item=>item.id===id )
+    if (alreadproduct){
+      setCount(c=>c+product.qty)
+    }
+    else{
+      setCart(prevcart=>[...prevcart,product])
+      setCount(c => c + quantity)
+    }
+    // const cleancart=cart.filter(item=>item===null)
+    // const clean=cart.find(item=>item.id===id)
+    // clean ? (setCart(cart.filter(item=>item.id!==id))) : ((()=>{setCart(c=>[...c,product])
+    //   setCount(c=>c+quantity)
+    // })())
+      // setCount(c=>c+quantity
     // console.log(product)
-    console.log(cart)
-    console.log(quantity)
+    // setCart(c=>[...c,product])
   }
+  useEffect(()=>{
+    console.log(cart)
+  },[cart])
   const filteredproducts=products.filter(product=>product.title.toLowerCase().includes(inpval.toLowerCase()))
   
   return (

@@ -7,7 +7,11 @@ function Cart() {
     const {cart,setCart}=useContext(cartapi);
     const deletef=(index)=>{
         setCart(cart.filter((_,i)=>i!==index))
-        console.log(cart)
+        const cartitem=cart.map(p=>p.qty)
+        setCount(c=>c-cartitem[0])
+        // setCount(0)
+        // console.log(cart)
+        // console.log(count)
     }
     return (
         <div className="cart-page">
