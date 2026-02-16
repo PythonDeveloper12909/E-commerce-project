@@ -14,13 +14,12 @@ function Products() {
   }, []);
 
   const updatecount = (id,product) => {
-    const quantity = val[id] || 1
+    let quantity = val[id] || 1
     const alreadproduct=cart.find(item=>item.id===id)
     if (alreadproduct){
       setCount(c=>c + quantity)
-      quantity=quantity + alreadproduct.qty
       setCart(
-        cart.map(item=>item.id===id ? {...item , qty:quantity} : item)
+        cart.map(item=>item.id===id ? {...item , qty:item.qty + quantity} : item)
       )
     }
     else{

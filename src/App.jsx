@@ -10,7 +10,7 @@ function App() {
         <Context>
             <Routes>
                 <Route path='/' element={<Home />}></Route>
-                <Route path='cart' element={<Cart />}></Route>
+                <Route path='/cart' element={<Cart />}></Route>
             </Routes>
         </Context>
     )
