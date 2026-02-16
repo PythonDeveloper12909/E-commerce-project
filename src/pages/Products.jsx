@@ -15,23 +15,18 @@ function Products() {
 
   const updatecount = (id,product) => {
     const quantity = val[id] || 1
-    product.qty=quantity
-    const alreadproduct=cart.find(item=>item.id===id )
+    const alreadproduct=cart.find(item=>item.id===id)
     if (alreadproduct){
-      setCount(c=>c+product.qty)
+      setCount(c=>c + quantity)
+      quantity=quantity + alreadproduct.qty
+      setCart(
+        cart.map(item=>item.id===id ? {...item , qty:quantity} : item)
+      )
     }
     else{
-      setCart(prevcart=>[...prevcart,product])
+      setCart(prevcart=>[...prevcart,{...product,qty:quantity}])
       setCount(c => c + quantity)
     }
-    // const cleancart=cart.filter(item=>item===null)
-    // const clean=cart.find(item=>item.id===id)
-    // clean ? (setCart(cart.filter(item=>item.id!==id))) : ((()=>{setCart(c=>[...c,product])
-    //   setCount(c=>c+quantity)
-    // })())
-      // setCount(c=>c+quantity
-    // console.log(product)
-    // setCart(c=>[...c,product])
   }
   useEffect(()=>{
     console.log(cart)
