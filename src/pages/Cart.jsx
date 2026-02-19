@@ -6,14 +6,19 @@ function Cart() {
     const { count,setCount } = useContext(api);
     const {cart,setCart}=useContext(cartapi);
     const [showbutton,setShowbutton]=useState(null)
+    const [changequantity,setChangequantity]=useState(null)
     const deletef=(index)=>{
         setCart(cart.filter((_,i)=>i!==index))
         const cartitem=cart.map(p=>p.qty)
-        setCount(c=>c-cartitem[0])
+        setCount(c=>c-cartitem[index])
         // setCount(0)
     }
     const update=(index)=>{
         setShowbutton(index)
+        setChangequantity(cart[index].qty)
+    }
+    const save=(index)=>{
+            
     }
     return (
         <div className="cart-page">
@@ -24,19 +29,20 @@ function Cart() {
             <div className='product-showcase'>
                 {cart.map((p,index)=>
                     p===null ? null : (
-                    <div className='p-s-container' key={index}>
+                    <div className='p-s-container' key={p.id}>
                         <img src={p.thumbnail} className='image'/>
                         <div className='text-container' key={index}>
                             <h1 key={index} className='tit'>{p.title}</h1>
                             <h2 className='pr'>${p.price}</h2>
                             <div className='quant-container' >
-                                <h3>Quantity:{p.qty}</h3>
                                 {showbutton===index ?
                                 <>
-                                    <button className='save'>Save</button>
+                                    <label htmlFor="connect" className='label'>Quantity:<input type="number" id='connect' className='quantinp' onChange={(e)=>setChangequantity(e.target.value)} value={changequantity}/></label>
+                                    <button className='save' onClick={()=>save(index)}>Save</button>
                                     <button className='del' onClick={()=>deletef(index)}>Delete</button>
                                 </> : 
                                 <>
+                                    <h3>Quantity:{p.qty}</h3>
                                     <button className='update' onClick={()=>update(index)}>Update</button>
                                     <button className='del' onClick={()=>deletef(index)}>Delete</button>
                                 </>}

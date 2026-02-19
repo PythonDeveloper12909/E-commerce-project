@@ -100,3 +100,9 @@
     color:aqua;
     cursor: pointer;
 }
+.label{
+    font-size: 1.3rem;
+}
+.quantinp{
+    max-width: 70px;
+}
