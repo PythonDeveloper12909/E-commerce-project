@@ -1,0 +1,102 @@
+.h1 {
+    font-size: 3rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+}
+
+.orders {
+    font-size: 2rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+}
+.review{
+    font-size: 2rem;
+    margin-left: 10%;
+    margin-top: 5%;
+}
+.p-container{
+    width: 500px;
+    height: 300px;
+    border: 1px solid black;
+}
+.p-s-container{
+   display: flex;
+   width: 800px;
+   height: 300px;
+   margin-top: 10px;
+   border: 1px solid rgb(202, 195, 195);
+}
+.image{
+    width: 150px;
+    height: 150px;
+    margin: 0;
+}
+.tit{
+    width: fit-content;
+    height: fit-content;
+    font-size: 1.3rem;
+    margin: 0;
+    color: black;
+}
+.pr{
+    width: fit-content;
+    height: fit-content;
+    margin: 0;
+    font-size: 1.5rem;
+}
+.text-container{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    margin-top: 30px;
+    gap: 5px;
+    height: fit-content;
+}
+.quant{
+    font-size: 1.3rem;
+}
+.update{
+    font-size: 1rem;
+    background-color: white;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+}
+.del{
+    font-size: 1rem;
+    background-color: white;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+}
+.update:hover{
+    color: aqua;
+    cursor: pointer;
+}
+.del:hover{
+    color:aqua;
+    cursor: pointer;
+}
+.quant-container{
+    display: flex;
+    align-items: center;
+    gap:5px;
+}
+.navigation{
+    color: black;
+    font-size: 2rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-left: 80%;
+}
+.save{
+    font-size: 1rem;
+    background-color: white;
+    width: fit-content;
+    height: fit-content;
+    border: none;
+}
+.save:hover{
+    color:aqua;
+    cursor: pointer;
+}
