@@ -10,7 +10,7 @@ function Cart() {
         setCart(cart.filter((_,i)=>i!==index))
         const cartitem=cart.map(p=>p.qty)
         setCount(c=>c-cartitem[0])
-        setCount(0)
+        // setCount(0)
     }
     const update=(index)=>{
         setShowbutton(index)
@@ -30,9 +30,16 @@ function Cart() {
                             <h1 key={index} className='tit'>{p.title}</h1>
                             <h2 className='pr'>${p.price}</h2>
                             <div className='quant-container' >
+                                <h3>Quantity:{p.qty}</h3>
                                 {showbutton===index ?
-                                <button className='save'>Save</button> : <button className='update' onClick={()=>update(p.qty,index)}>Update</button >}
-                                <button className='del' onClick={()=>deletef(index)}>Delete</button>
+                                <>
+                                    <button className='save'>Save</button>
+                                    <button className='del' onClick={()=>deletef(index)}>Delete</button>
+                                </> : 
+                                <>
+                                    <button className='update' onClick={()=>update(index)}>Update</button>
+                                    <button className='del' onClick={()=>deletef(index)}>Delete</button>
+                                </>}
                             </div>
                         </div>
                     </div>))}
