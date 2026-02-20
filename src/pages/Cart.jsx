@@ -17,8 +17,14 @@ function Cart() {
         setShowbutton(index)
         setChangequantity(cart[index].qty)
     }
-    const save=(index)=>{
-            
+    const save=(id)=>{
+        const updatedcart=[...cart]
+        const oldqty=updatedcart[id].qty
+        updatedcart[id].qty=Number(changequantity)
+        setCart(updatedcart)
+        setShowbutton(null)
+        setCount(c=>(c - oldqty) + Number(changequantity))
+
     }
     return (
         <div className="cart-page">
@@ -39,12 +45,12 @@ function Cart() {
                                 <>
                                     <label htmlFor="connect" className='label'>Quantity:<input type="number" id='connect' className='quantinp' onChange={(e)=>setChangequantity(e.target.value)} value={changequantity}/></label>
                                     <button className='save' onClick={()=>save(index)}>Save</button>
-                                    <button className='del' onClick={()=>deletef(index)}>Delete</button>
+                                    <button className='del' onClick={()=>deletef(p.id)}>Delete</button>
                                 </> : 
                                 <>
                                     <h3>Quantity:{p.qty}</h3>
                                     <button className='update' onClick={()=>update(index)}>Update</button>
-                                    <button className='del' onClick={()=>deletef(index)}>Delete</button>
+                                    <button className='del' onClick={()=>deletef(p.id)}>Delete</button>
                                 </>}
                             </div>
                         </div>
