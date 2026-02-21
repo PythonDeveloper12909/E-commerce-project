@@ -1,3 +1,16 @@
+.center-nav {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+}
+.right-nav {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    margin-right: 5rem;
+}
 .h1 {
     font-size: 3rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -85,9 +98,15 @@
 .navigation{
     color: black;
     font-size: 2rem;
-    font-family: Arial, Helvetica, sans-serif;
-    font-weight: bold;
-    margin-left: 80%;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 600;
+    text-align: center;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.navigation:hover {
+    color: darkgreen;
 }
 .save{
     font-size: 1rem;
@@ -105,4 +124,13 @@
 }
 .quantinp{
     max-width: 70px;
+}
+.nav-container{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 20px;
+}
+.main-showcase{
+    
 }

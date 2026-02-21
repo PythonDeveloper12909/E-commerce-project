@@ -9,18 +9,20 @@ function Cart() {
     const [changequantity,setChangequantity]=useState(null)
     const deletef=(index)=>{
         setCart(cart.filter((_,i)=>i!==index))
-        const cartitem=cart.map(p=>p.qty)
-        setCount(c=>c-cartitem[index])
-        // setCount(0)
+        setCount(c=>c-cart[index].qty)
+        setShowbutton(null)
     }
     const update=(index)=>{
         setShowbutton(index)
         setChangequantity(cart[index].qty)
     }
-    const save=(id)=>{
-        const updatedcart=[...cart]
-        const oldqty=updatedcart[id].qty
-        updatedcart[id].qty=Number(changequantity)
+    const save=(index)=>{
+        if (changequantity <= 0 || changequantity>9999){
+            window.alert('Invalid quantity')
+            return;
+        }
+        const oldqty=cart[index].qty
+        const updatedcart=cart.map((item,i)=>index===i ? {...item,qty : Number(changequantity)} : item)
         setCart(updatedcart)
         setShowbutton(null)
         setCount(c=>(c - oldqty) + Number(changequantity))
@@ -28,33 +30,44 @@ function Cart() {
     }
     return (
         <div className="cart-page">
-            {count > 0 ? <h1 className='orders'>Your Orders ({count})</h1>
-            : <h1 className='h1'>No items added yet!</h1>}
-            <Link to="/"><h1 className='navigation'>Home</h1></ Link>
+            <div className='nav-container'>
+                <div className='center-nav'>
+                    {count > 0 ? <h1 className='orders'>Your Orders ({count})</h1>
+                    : <h1 className='h1'>No items added yet!</h1>}
+                </div>
+                <div className='right-nav'>
+                    <Link to="/"><h1 className='navigation'>Home</h1></ Link>
+                </div>
+            </div>
             <h2 className='review'>Review Your Orders</h2>
-            <div className='product-showcase'>
+            <div className='main-showcase'>
+                <div className='product-showcase'>
                 {cart.map((p,index)=>
                     p===null ? null : (
                     <div className='p-s-container' key={p.id}>
-                        <img src={p.thumbnail} className='image'/>
-                        <div className='text-container' key={index}>
-                            <h1 key={index} className='tit'>{p.title}</h1>
+                        <img src={p.thumbnail} className='image' alt={p.title}/>
+                        <div className='text-container' >
+                            <h1 className='tit'>{p.title}</h1>
                             <h2 className='pr'>${p.price}</h2>
                             <div className='quant-container' >
                                 {showbutton===index ?
                                 <>
-                                    <label htmlFor="connect" className='label'>Quantity:<input type="number" id='connect' className='quantinp' onChange={(e)=>setChangequantity(e.target.value)} value={changequantity}/></label>
+                                    <label htmlFor="connect" className='label'>Quantity:<input type="number" id='connect' className='quantinp' onChange={(e)=>setChangequantity(Number(e.target.value))} value={changequantity}/></label>
                                     <button className='save' onClick={()=>save(index)}>Save</button>
-                                    <button className='del' onClick={()=>deletef(p.id)}>Delete</button>
+                                    <button className='del' onClick={()=>deletef(index)}>Delete</button>
                                 </> : 
                                 <>
                                     <h3>Quantity:{p.qty}</h3>
                                     <button className='update' onClick={()=>update(index)}>Update</button>
-                                    <button className='del' onClick={()=>deletef(p.id)}>Delete</button>
+                                    <button className='del' onClick={()=>deletef(index)}>Delete</button>
                                 </>}
                             </div>
                         </div>
                     </div>))}
+                    </div>
+                <div className='total-container'>
+                    he
+                </div>
             </div>
         </div>
     )
