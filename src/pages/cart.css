@@ -5,12 +5,14 @@
     display: flex;
     align-items: center;
 }
+
 .right-nav {
     margin-left: auto;
     display: flex;
     align-items: center;
     margin-right: 5rem;
 }
+
 .h1 {
     font-size: 3rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -22,80 +24,118 @@
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
     text-align: center;
 }
-.review{
+
+.review {
     font-size: 2rem;
-    margin-left: 10%;
+    margin-left: 10rem;
     margin-top: 5%;
 }
-.p-container{
-    width: 500px;
-    height: 300px;
-    border: 1px solid black;
+
+
+.p-s-container {
+    display: flex;
+    flex-direction: column;
+    width: 800px;
+    height: auto;
+    margin-bottom: 10px;
+    border: 1px solid rgb(202, 195, 195);
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 15px;
 }
-.p-s-container{
-   display: flex;
-   width: 800px;
-   height: 300px;
-   margin-top: 10px;
-   border: 1px solid rgb(202, 195, 195);
+
+.product-row {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 12px;
+    gap: 12px;
 }
-.image{
+
+.delivery-date {
+    font-size: 1rem;
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+    color: #2d6a4f;
+    background-color: #f0faf4;
+    border-bottom: 1px solid rgb(220, 220, 220);
+    padding: 8px 16px;
+    margin: 0;
+    letter-spacing: 0.01em;
+}
+
+.delivery-date span {
+    font-weight: 700;
+    color: #1b4332;
+}
+
+.image {
     width: 150px;
     height: 150px;
     margin: 0;
 }
-.tit{
+
+.tit {
     width: fit-content;
     height: fit-content;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     margin: 0;
     color: black;
 }
-.pr{
+
+.pr {
     width: fit-content;
     height: fit-content;
     margin: 0;
     font-size: 1.5rem;
 }
-.text-container{
+
+.text-container {
     display: flex;
     flex-direction: column;
     margin: 0;
-    margin-top: 30px;
+    margin-top: 10px;
     gap: 5px;
     height: fit-content;
 }
-.quant{
+
+.quant {
     font-size: 1.3rem;
 }
-.update{
+
+.update {
     font-size: 1rem;
     background-color: white;
     width: fit-content;
     height: fit-content;
     border: none;
 }
-.del{
+
+.del {
     font-size: 1rem;
     background-color: white;
     width: fit-content;
     height: fit-content;
     border: none;
 }
-.update:hover{
+
+.update:hover {
     color: aqua;
     cursor: pointer;
 }
-.del:hover{
-    color:aqua;
+
+.del:hover {
+    color: aqua;
     cursor: pointer;
 }
-.quant-container{
+
+.quant-container {
     display: flex;
     align-items: center;
-    gap:5px;
+    gap: 5px;
 }
-.navigation{
+
+.navigation {
     color: black;
     font-size: 2rem;
     font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
@@ -108,29 +148,112 @@
 .navigation:hover {
     color: darkgreen;
 }
-.save{
+
+.save {
     font-size: 1rem;
     background-color: white;
     width: fit-content;
     height: fit-content;
     border: none;
 }
-.save:hover{
-    color:aqua;
+
+.save:hover {
+    color: aqua;
     cursor: pointer;
 }
-.label{
+
+.label {
     font-size: 1.3rem;
 }
-.quantinp{
+
+.quantinp {
     max-width: 70px;
 }
-.nav-container{
+
+.nav-container {
     display: flex;
     align-items: center;
     width: 100%;
     margin-bottom: 20px;
 }
-.main-showcase{
-    
+
+.main-showcase {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+    margin-left: 10rem;
+}
+
+.total-container {
+    border: 1px solid rgb(222, 222, 222);
+    padding: 1.5rem;
+    border-radius: 10px;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.payment-summary {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    text-align: left;
+    margin: 0 0 0.75rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgb(222, 222, 222);
+}
+
+.summary-row {
+    font-family: Arial, sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #333;
+    margin: 0;
+    padding: 0.3rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-divider {
+    border: none;
+    border-top: 1px solid rgb(200, 200, 200);
+    margin: 0.75rem 0;
+}
+
+.order-total {
+    font-family: Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #111;
+    margin: 0;
+    padding: 0.3rem 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.place-order {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #2d6a4f;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: Arial, sans-serif;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.place-order:hover {
+    background-color: #1b4332;
+}
+
+.place-order:active {
+    transform: scale(0.98);
 }
