@@ -1,13 +1,15 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext,createContext} from "react";
 import { api, cartapi } from '../Context.jsx'
 import { inputvalue } from './Home.jsx'
-function Products() {
+const totalpriceprovider=createContext()
+function Products({children}) {
   const [products, setProducts] = useState([]);
   const { count, setCount } = useContext(api);
   const { inpval } = useContext(inputvalue)
   const [val, setVal] = useState({});
   const { cart, setCart } = useContext(cartapi)
   const [loading, setLoading] = useState(true)
+  const [totalprice,setTotalprice]=useState(null)
   useEffect(() => {
     fetch("https://dummyjson.com/products?limit=100")
       .then(res => res.json())
@@ -41,10 +43,13 @@ function Products() {
       }
       setCart(prevcart => [...prevcart, { ...product, qty: quantity }])
       setCount(c => c + quantity)
+      setTotalprice(prev=> prev+ (product.price * quantity))
     }
   }
   const filteredproducts = products.filter(product => product.title.toLowerCase().includes(inpval.toLowerCase()))
-
+  useEffect(()=>{
+  console.log(totalprice)
+},[totalprice])
   return (
     <>
       <div className="product-container">
@@ -69,6 +74,9 @@ function Products() {
           </div >
         )) : <h2 className="no-products">No products like that!</h2>}
       </div>
+      <totalpriceprovider.Provider value={{totalprice,setTotalprice}}>
+                  {children}
+      </totalpriceprovider.Provider>
     </>
   );
 }

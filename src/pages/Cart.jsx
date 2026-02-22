@@ -1,12 +1,43 @@
 import './cart.css'
 import { useContext, useState } from 'react'
 import { api, cartapi } from '../Context.jsx'
+import {totalpriceprovider} from './Products.jsx'
 import { Link } from 'react-router-dom'
 function Cart() {
     const { count, setCount } = useContext(api);
     const { cart, setCart } = useContext(cartapi);
+    const {totalprice}=useContext(totalpriceprovider)
     const [showbutton, setShowbutton] = useState(null)
     const [changequantity, setChangequantity] = useState(null)
+    const [selectedDelivery, setSelectedDelivery] = useState({})
+    let nextday=new Date()
+    nextday.setDate(nextday.getDate()+1)
+    let express=new Date()
+    express.setDate(express.getDate()+3)
+    let standard=new Date()
+    standard.setDate(standard.getDate()+7)
+    const deliveryOptions = [
+        { id: 'standard', label: 'Standard', date: `${standard.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric"
+  })}`, desc: '5–7 business days', price: 'Free' },
+
+        { id: 'express', label: 'Express', date: `${express.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric"
+  })}`, desc: '2–3 business days', price: '$5.99' },
+
+        { id: 'nextday', label: 'Next Day', date: `${nextday.toLocaleDateString("en-US", {
+    weekday: "short",
+    month: "short",
+    day: "numeric"
+  })}`, desc: '1 business day', price: '$12.99' },
+    ]
+    const selectDelivery = (itemIndex, optionId) => {
+        setSelectedDelivery(prev => ({ ...prev, [itemIndex]: optionId }))
+    }
     const deletef = (index) => {
         setCart(cart.filter((_, i) => i !== index))
         setCount(c => c - cart[index].qty)
@@ -45,7 +76,10 @@ function Cart() {
                     {cart.map((p, index) =>
                         p === null ? null : (
                             <div className='p-s-container' key={p.id}>
-                                <p className='delivery-date'>📦 Delivery by <span>Tuesday, March 17</span></p>
+                                <p className='delivery-date'>📦 Delivery by <span>{deliveryOptions.map((opt)=>{
+                                    const isselected=(selectedDelivery[index] ?? 'standard') === opt.id
+                                    return(isselected ? opt.date : '')
+                                })}</span></p>
                                 <div className='product-row'>
                                     <img src={p.thumbnail} className='image' alt={p.title} />
                                     <div className='text-container'>
@@ -65,18 +99,37 @@ function Cart() {
                                                 </>}
                                         </div>
                                     </div>
+                                    <div className='delivery-options'>
+                                        <p className='delivery-options-title'>Choose delivery date</p>
+                                        {deliveryOptions.map((opt) => {
+                                            const isSelected = (selectedDelivery[index] ?? 'standard') === opt.id
+                                            return (
+                                                <button
+                                                    key={opt.id}
+                                                    type='button'
+                                                    className={`delivery-option ${isSelected ? 'selected' : ''}`}
+                                                    onClick={() => selectDelivery(index, opt.id)}
+                                                >
+                                                    <span className='delivery-option-date'>{opt.date}</span>
+                                                    <span className='delivery-option-label'>{opt.label}</span>
+                                                    <span className='delivery-option-desc'>{opt.desc}</span>
+                                                    <span className='delivery-option-price'>{opt.price}</span>
+                                                </button>
+                                            )
+                                        })}
+                                    </div>
                                 </div>
                             </div>))}
                 </div>
                 <div className='total-container'>
-                    <h1 className='payment-summary'>Payment Summary</h1>
-                    <h2 className='summary-row'>Items(4): $9.99</h2>
-                    <h2 className='summary-row'>Shipping &amp; handling: $9</h2>
-                    <h2 className='summary-row'>Total before tax: $105</h2>
-                    <h2 className='summary-row'>Estimated tax: 10%</h2>
-                    <hr className='summary-divider' />
-                    <h2 className='order-total'>Order total: $105.23</h2>
-                    <button className='place-order'>Place Your Order</button>
+                        <h1 className='payment-summary'>Payment Summary</h1>
+                        <h2 className='summary-row'>Items({count}): ${totalprice}</h2>
+                        <h2 className='summary-row'>Shipping &amp; handling: $9</h2>
+                        <h2 className='summary-row'>Total before tax: $105</h2>
+                        <h2 className='summary-row'>Estimated tax: 10%</h2>
+                        <hr className='summary-divider' />
+                        <h2 className='order-total'>Order total: $105.23</h2>
+                        <button className='place-order'>Place Your Order</button>
                 </div>
             </div>
         </div>

@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+.cart-page {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 .center-nav {
     position: absolute;
     left: 50%;
@@ -14,19 +20,25 @@
 }
 
 .h1 {
-    font-size: 3rem;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 3.25rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     text-align: center;
 }
 
 .orders {
-    font-size: 2rem;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 2.25rem;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     text-align: center;
 }
 
 .review {
-    font-size: 2rem;
+    font-size: 2.25rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
     margin-left: 10rem;
     margin-top: 5%;
 }
@@ -36,7 +48,7 @@
     display: flex;
     flex-direction: column;
     width: 800px;
-    height: auto;
+    height: fit-content;
     margin-bottom: 10px;
     border: 1px solid rgb(202, 195, 195);
     border-radius: 10px;
@@ -49,7 +61,7 @@
     flex-direction: row;
     align-items: flex-start;
     padding: 12px;
-    gap: 12px;
+    gap: 20px;
 }
 
 .delivery-date {
@@ -78,16 +90,18 @@
 .tit {
     width: fit-content;
     height: fit-content;
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+    font-weight: 600;
     margin: 0;
-    color: black;
+    color: #111;
 }
 
 .pr {
     width: fit-content;
     height: fit-content;
     margin: 0;
-    font-size: 1.5rem;
+    font-size: 1.65rem;
+    font-weight: 700;
 }
 
 .text-container {
@@ -97,14 +111,94 @@
     margin-top: 10px;
     gap: 5px;
     height: fit-content;
+    flex: 1;
+    min-width: 0;
+}
+
+.delivery-options {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 160px;
+    padding: 8px;
+    background: linear-gradient(135deg, #f8faf9 0%, #f0f7f4 100%);
+    border-radius: 10px;
+    border: 1px solid #e0ebe6;
+}
+
+.delivery-options-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1b4332;
+    margin: 0 0 2px 0;
+    letter-spacing: 0.02em;
+}
+
+.delivery-option {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 5px 10px;
+    background: white;
+    border: 1.5px solid #d4e5dc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: left;
+}
+
+.delivery-option:hover {
+    border-color: #2d6a4f;
+    background: #f7fcf9;
+    box-shadow: 0 2px 8px rgba(45, 106, 79, 0.08);
+}
+
+.delivery-option.selected {
+    border-color: #2d6a4f;
+    background: linear-gradient(135deg, #e8f5ec 0%, #d4edda 100%);
+    box-shadow: 0 0 0 2px rgba(45, 106, 79, 0.2);
+}
+
+.delivery-option-date {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: #1b4332;
+    letter-spacing: -0.01em;
+}
+
+.delivery-option-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #2d6a4f;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.delivery-option-desc {
+    font-size: 0.7rem;
+    font-weight: 500;
+    color: #5a6d65;
+}
+
+.delivery-option-price {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1b4332;
+    margin-top: 0;
+}
+
+.quant-container h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
 }
 
 .quant {
-    font-size: 1.3rem;
+    font-size: 1.4rem;
 }
 
 .update {
-    font-size: 1rem;
+    font-size: 1.05rem;
     background-color: white;
     width: fit-content;
     height: fit-content;
@@ -112,7 +206,7 @@
 }
 
 .del {
-    font-size: 1rem;
+    font-size: 1.05rem;
     background-color: white;
     width: fit-content;
     height: fit-content;
@@ -137,9 +231,8 @@
 
 .navigation {
     color: black;
-    font-size: 2rem;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    font-weight: 600;
+    font-size: 2.15rem;
+    font-weight: 700;
     text-align: center;
     cursor: pointer;
     transition: color 0.3s ease;
@@ -150,7 +243,7 @@
 }
 
 .save {
-    font-size: 1rem;
+    font-size: 1.05rem;
     background-color: white;
     width: fit-content;
     height: fit-content;
@@ -163,7 +256,8 @@
 }
 
 .label {
-    font-size: 1.3rem;
+    font-size: 1.15rem;
+    font-weight: 600;
 }
 
 .quantinp {
@@ -207,9 +301,8 @@
 }
 
 .summary-row {
-    font-family: Arial, sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
+    font-size: 1.1rem;
+    font-weight: 500;
     color: #333;
     margin: 0;
     padding: 0.3rem 0;
@@ -237,12 +330,11 @@
 .place-order {
     margin-top: 1rem;
     width: 100%;
-    padding: 0.75rem 1rem;
+    padding: 0.85rem 1rem;
     background-color: #2d6a4f;
     color: white;
-    font-size: 1rem;
-    font-weight: 600;
-    font-family: Arial, sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
     border: none;
     border-radius: 8px;
     cursor: pointer;
