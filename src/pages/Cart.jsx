@@ -106,7 +106,8 @@ function Cart() {
                                         <p className='delivery-options-title'>Choose delivery date</p>
                                         {deliveryOptions.map((opt) => {
                                             const isSelected = (selectedDelivery[index] ?? 'standard') === opt.id
-                                            setShippingprice(prev=>prev+opt.price)
+                                            setShippingprice(isSelected ? (opt.price === 'Free' ? 0 : parseFloat(opt.price)) : shippingprice)
+                                            
                                             return (
                                                 <button
                                                     key={opt.id}
