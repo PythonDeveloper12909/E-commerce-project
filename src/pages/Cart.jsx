@@ -1,15 +1,15 @@
 import './cart.css'
 import { useContext, useState } from 'react'
-import { api, cartapi } from '../Context.jsx'
-import {totalpriceprovider} from './Products.jsx'
+import { api, cartapi,totalpriceapi} from '../Context.jsx'
 import { Link } from 'react-router-dom'
 function Cart() {
     const { count, setCount } = useContext(api);
     const { cart, setCart } = useContext(cartapi);
-    const {totalprice}=useContext(totalpriceprovider)
     const [showbutton, setShowbutton] = useState(null)
     const [changequantity, setChangequantity] = useState(null)
     const [selectedDelivery, setSelectedDelivery] = useState({})
+    const {totalprice,setTotalprice}=useContext(totalpriceapi)
+    const [shippingprice,setShippingprice]=useState(0)
     let nextday=new Date()
     nextday.setDate(nextday.getDate()+1)
     let express=new Date()
@@ -38,16 +38,18 @@ function Cart() {
     const selectDelivery = (itemIndex, optionId) => {
         setSelectedDelivery(prev => ({ ...prev, [itemIndex]: optionId }))
     }
-    const deletef = (index) => {
+    const deletef = (product,index) => {
         setCart(cart.filter((_, i) => i !== index))
         setCount(c => c - cart[index].qty)
         setShowbutton(null)
+        setTotalprice(prev=>prev-(product.qty * product.price))
+        
     }
     const update = (index) => {
         setShowbutton(index)
         setChangequantity(cart[index].qty)
     }
-    const save = (index) => {
+    const save = (product,index) => {
         if (changequantity <= 0 || changequantity > 9999) {
             window.alert('Invalid quantity')
             return;
@@ -57,6 +59,7 @@ function Cart() {
         setCart(updatedcart)
         setShowbutton(null)
         setCount(c => (c - oldqty) + Number(changequantity))
+        setTotalprice(prev=>(prev-(oldqty * product.price)) + (Number(changequantity) * product.price))
 
     }
     return (
@@ -89,13 +92,13 @@ function Cart() {
                                             {showbutton === index ?
                                                 <>
                                                     <label htmlFor="connect" className='label'>Quantity:<input type="number" id='connect' className='quantinp' onChange={(e) => setChangequantity(Number(e.target.value))} value={changequantity} /></label>
-                                                    <button className='save' onClick={() => save(index)}>Save</button>
-                                                    <button className='del' onClick={() => deletef(index)}>Delete</button>
+                                                    <button className='save' onClick={() => save(p,index)}>Save</button>
+                                                    <button className='del' onClick={() => deletef(p,index)}>Delete</button>
                                                 </> :
                                                 <>
                                                     <h3>Quantity:{p.qty}</h3>
                                                     <button className='update' onClick={() => update(index)}>Update</button>
-                                                    <button className='del' onClick={() => deletef(index)}>Delete</button>
+                                                    <button className='del' onClick={() => deletef(p,index)}>Delete</button>
                                                 </>}
                                         </div>
                                     </div>
@@ -103,6 +106,7 @@ function Cart() {
                                         <p className='delivery-options-title'>Choose delivery date</p>
                                         {deliveryOptions.map((opt) => {
                                             const isSelected = (selectedDelivery[index] ?? 'standard') === opt.id
+                                            setShippingprice(prev=>prev+opt.price)
                                             return (
                                                 <button
                                                     key={opt.id}
@@ -123,7 +127,7 @@ function Cart() {
                 </div>
                 <div className='total-container'>
                         <h1 className='payment-summary'>Payment Summary</h1>
-                        <h2 className='summary-row'>Items({count}): ${totalprice}</h2>
+                        <h2 className='summary-row'>Items({count}): ${totalprice.toFixed(2)}</h2>
                         <h2 className='summary-row'>Shipping &amp; handling: $9</h2>
                         <h2 className='summary-row'>Total before tax: $105</h2>
                         <h2 className='summary-row'>Estimated tax: 10%</h2>

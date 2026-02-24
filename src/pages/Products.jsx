@@ -1,15 +1,14 @@
 import { useState, useEffect, useContext,createContext} from "react";
-import { api, cartapi } from '../Context.jsx'
+import { api, cartapi,totalpriceapi } from '../Context.jsx'
 import { inputvalue } from './Home.jsx'
-const totalpriceprovider=createContext()
-function Products({children}) {
+function Products() {
   const [products, setProducts] = useState([]);
   const { count, setCount } = useContext(api);
   const { inpval } = useContext(inputvalue)
   const [val, setVal] = useState({});
   const { cart, setCart } = useContext(cartapi)
   const [loading, setLoading] = useState(true)
-  const [totalprice,setTotalprice]=useState(null)
+  const {totalprice,setTotalprice}=useContext(totalpriceapi)
   useEffect(() => {
     fetch("https://dummyjson.com/products?limit=100")
       .then(res => res.json())
@@ -35,6 +34,7 @@ function Products({children}) {
       setCart(
         cart.map(item => item.id === id ? { ...item, qty: item.qty + quantity } : item)
       )
+      setTotalprice(prev=>prev + (product.price * quantity))
     }
     else {
       if (cart.length > 199) {
@@ -43,13 +43,13 @@ function Products({children}) {
       }
       setCart(prevcart => [...prevcart, { ...product, qty: quantity }])
       setCount(c => c + quantity)
-      setTotalprice(prev=> prev+ (product.price * quantity))
+      setTotalprice(prev=>prev + (product.price * quantity))
     }
   }
-  const filteredproducts = products.filter(product => product.title.toLowerCase().includes(inpval.toLowerCase()))
   useEffect(()=>{
-  console.log(totalprice)
-},[totalprice])
+    console.log(totalprice)
+  },[totalprice])
+  const filteredproducts = products.filter(product => product.title.toLowerCase().includes(inpval.toLowerCase()))
   return (
     <>
       <div className="product-container">
@@ -74,9 +74,6 @@ function Products({children}) {
           </div >
         )) : <h2 className="no-products">No products like that!</h2>}
       </div>
-      <totalpriceprovider.Provider value={{totalprice,setTotalprice}}>
-                  {children}
-      </totalpriceprovider.Provider>
     </>
   );
 }
