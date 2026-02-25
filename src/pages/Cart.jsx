@@ -35,10 +35,10 @@ function Cart() {
     day: "numeric"
   })}`, desc: '1 business day', price: 12.99 },
     ]
-    const selectDelivery = (price,itemIndex, optionId) => {
+    const selectDelivery = (itemIndex, optionId) => {
         setSelectedDelivery(prev => ({ ...prev, [itemIndex]: optionId }))
-        const updatedcart=cart.map((item,i)=>itemIndex===i ? {...item,shippingprice : price} : item)
-        setCart(updatedcart)
+        // const updatedcart=cart.map((item,i)=>itemIndex===i ? {...item,shippingprice : price} : item)
+        // setCart(updatedcart)
 
         
     }
@@ -116,7 +116,7 @@ function Cart() {
                                                     key={opt.id}
                                                     type='button'
                                                     className={`delivery-option ${isSelected ? 'selected' : ''}`}
-                                                    onClick={() => selectDelivery(opt.price,index, opt.id)}
+                                                    onClick={() => selectDelivery(index, opt.id)}
                                                 >
                                                     <span className='delivery-option-date'>{opt.date}</span>
                                                     <span className='delivery-option-label'>{opt.label}</span>
