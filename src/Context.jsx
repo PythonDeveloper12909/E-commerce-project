@@ -2,6 +2,7 @@ import { createContext, useState, useEffect} from "react";
 export const api = createContext()
 export const cartapi=createContext()
 export const totalpriceapi=createContext()
+export const selectedapi=createContext()
 function Context({ children }) {
     const [count, setCount] = useState(()=>{
         const saved=localStorage.getItem('count')
@@ -22,6 +23,10 @@ function Context({ children }) {
         const saved=localStorage.getItem('totalprice')
         return saved ? JSON.parse(saved) : 0;
     })
+    const [isSelected,setIsSelected]=useState(()=>{
+        const saved_selected=JSON.getItem('selected')
+        return saved_selected ? JSON.parse(saved_selected) : false;
+    })
     useEffect(()=>{
         localStorage.setItem('count',JSON.stringify(count))
     },[count])
@@ -31,12 +36,17 @@ function Context({ children }) {
     useEffect(()=>{
         localStorage.setItem('totalprice',JSON.stringify(totalprice))
     },[totalprice])
+    useEffect(()=>{
+        localStorage.setItem('selected',JSON.stringify(isSelected))
+    },[isSelected])
     return (
         <>
             <api.Provider value={{ count, setCount}}>
                 <cartapi.Provider value={{cart,setCart}}>
                     <totalpriceapi.Provider value={{totalprice,setTotalprice}}>
-                      {children}
+                        <selectedapi.Provider value={{isSelected,setIsSelected}}>
+                            {children}
+                        </selectedapi.Provider>
                     </totalpriceapi.Provider>
                 </cartapi.Provider>
             </api.Provider>

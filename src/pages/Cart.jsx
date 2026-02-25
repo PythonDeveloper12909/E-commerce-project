@@ -1,6 +1,6 @@
 import './cart.css'
-import { useContext, useState } from 'react'
-import { api, cartapi,totalpriceapi} from '../Context.jsx'
+import { useContext, useEffect, useState } from 'react'
+import { api, cartapi,totalpriceapi,selectedapi} from '../Context.jsx'
 import { Link } from 'react-router-dom'
 function Cart() {
     const { count, setCount } = useContext(api);
@@ -9,7 +9,7 @@ function Cart() {
     const [changequantity, setChangequantity] = useState(null)
     const [selectedDelivery, setSelectedDelivery] = useState({})
     const {totalprice,setTotalprice}=useContext(totalpriceapi)
-    // const [shippingprice,setShippingprice]=useState(0)
+    const {isSelected,setIsSelected}=useContext(selectedapi)
     let nextday=new Date()
     nextday.setDate(nextday.getDate()+1)
     let express=new Date()
@@ -37,8 +37,7 @@ function Cart() {
     ]
     const selectDelivery = (price,itemIndex, optionId) => {
         setSelectedDelivery(prev => ({ ...prev, [itemIndex]: optionId }))
-        // {price==='Free' ? setShippingprice(prev=>prev+0) : setShippingprice(prev=>prev + price)}
-        const updatedcart=cart.map((item,i)=>itemIndex===i ? {...item,shippingprice:price} : item)
+        const updatedcart=cart.map((item,i)=>itemIndex===i ? {...item,shippingprice : price} : item)
         setCart(updatedcart)
 
         
@@ -65,12 +64,8 @@ function Cart() {
         setShowbutton(null)
         setCount(c => (c - oldqty) + Number(changequantity))
         setTotalprice(prev=>(prev-(oldqty * product.price)) + (Number(changequantity) * product.price))
-
     }
-    const shippingprice = cart.reduce(
-  (total, item) => total + (item.shippingprice || 0),0
-)
-    console.log(shippingprice)
+    useEffect(()=>{console.log(cart)},[cart])
     return (
         <div className="cart-page">
             <div className='nav-container'>
@@ -137,7 +132,7 @@ function Cart() {
                 <div className='total-container'>
                         <h1 className='payment-summary'>Payment Summary</h1>
                         <h2 className='summary-row'>Items({count}): ${totalprice.toFixed(2)}</h2>
-                        <h2 className='summary-row'>Shipping &amp; handling: {shippingprice===0 ? 'Free' : `$${shippingprice}`}</h2>
+                        <h2 className='summary-row'>Shipping &amp; handling: {0}</h2>
                         <h2 className='summary-row'>Total before tax: $105</h2>
                         <h2 className='summary-row'>Estimated tax: 10%</h2>
                         <hr className='summary-divider' />
