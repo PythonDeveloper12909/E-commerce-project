@@ -25,7 +25,7 @@ function Context({ children }) {
     })
     const [isSelected,setIsSelected]=useState(()=>{
         const saved_selected=localStorage.getItem('selected')
-        return saved_selected ? JSON.parse(saved_selected) : false;
+        return saved_selected ? JSON.parse(saved_selected) : {};
     })
     useEffect(()=>{
         localStorage.setItem('count',JSON.stringify(count))

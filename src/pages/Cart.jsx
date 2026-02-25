@@ -7,7 +7,7 @@ function Cart() {
     const { cart, setCart } = useContext(cartapi);
     const [showbutton, setShowbutton] = useState(null)
     const [changequantity, setChangequantity] = useState(null)
-    const [selectedDelivery, setSelectedDelivery] = useState({})
+    // const [selectedDelivery, setSelectedDelivery] = useState({})
     const {totalprice,setTotalprice}=useContext(totalpriceapi)
     const {isSelected,setIsSelected}=useContext(selectedapi)
     let nextday=new Date()
@@ -36,7 +36,7 @@ function Cart() {
   })}`, desc: '1 business day', price: 12.99 },
     ]
     const selectDelivery = (itemIndex, optionId) => {
-        setSelectedDelivery(prev => ({ ...prev, [itemIndex]: optionId }))
+        setIsSelected(prev => ({ ...prev, [itemIndex]: optionId }))
         // const updatedcart=cart.map((item,i)=>itemIndex===i ? {...item,shippingprice : price} : item)
         // setCart(updatedcart)
 
@@ -47,7 +47,8 @@ function Cart() {
         setCount(c => c - cart[index].qty)
         setShowbutton(null)
         setTotalprice(prev=>prev-(product.qty * product.price))
-        
+        localStorage.removeItem('selected')
+        setIsSelected({})
     }
     const update = (index) => {
         setShowbutton(index)
@@ -84,7 +85,7 @@ function Cart() {
                         p === null ? null : (
                             <div className='p-s-container' key={p.id}>
                                 <p className='delivery-date'>📦 Delivery by <span>{deliveryOptions.map((opt)=>{
-                                    const isselected=(selectedDelivery[index] ?? 'standard') === opt.id
+                                    const isselected=(isSelected[index] ?? 'standard') === opt.id
                                     return(isselected ? opt.date : '')
                                 })}</span></p>
                                 <div className='product-row'>
@@ -109,13 +110,12 @@ function Cart() {
                                     <div className='delivery-options'>
                                         <p className='delivery-options-title'>Choose delivery date</p>
                                         {deliveryOptions.map((opt) => {
-                                            const isSelected = (selectedDelivery[index] ?? 'standard') === opt.id
-    
+                                            const selected = (isSelected[index] ?? 'standard') === opt.id
                                             return (
                                                 <button
                                                     key={opt.id}
                                                     type='button'
-                                                    className={`delivery-option ${isSelected ? 'selected' : ''}`}
+                                                    className={`delivery-option ${selected ? 'selected' : ''}`}
                                                     onClick={() => selectDelivery(index, opt.id)}
                                                 >
                                                     <span className='delivery-option-date'>{opt.date}</span>
