@@ -9,7 +9,7 @@ function Cart() {
     const [changequantity, setChangequantity] = useState(null)
     const [selectedDelivery, setSelectedDelivery] = useState({})
     const {totalprice,setTotalprice}=useContext(totalpriceapi)
-    const [shippingprice,setShippingprice]=useState(0)
+    // const [shippingprice,setShippingprice]=useState(0)
     let nextday=new Date()
     nextday.setDate(nextday.getDate()+1)
     let express=new Date()
@@ -21,22 +21,27 @@ function Cart() {
     weekday: "short",
     month: "short",
     day: "numeric"
-  })}`, desc: '5–7 business days', price: 'Free' },
+  })}`, desc: '5–7 business days', price: 0 },
 
         { id: 'express', label: 'Express', date: `${express.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
     day: "numeric"
-  })}`, desc: '2–3 business days', price: '$5.99' },
+  })}`, desc: '2–3 business days', price: 5.99 },
 
         { id: 'nextday', label: 'Next Day', date: `${nextday.toLocaleDateString("en-US", {
     weekday: "short",
     month: "short",
     day: "numeric"
-  })}`, desc: '1 business day', price: '$12.99' },
+  })}`, desc: '1 business day', price: 12.99 },
     ]
-    const selectDelivery = (itemIndex, optionId) => {
+    const selectDelivery = (price,itemIndex, optionId) => {
         setSelectedDelivery(prev => ({ ...prev, [itemIndex]: optionId }))
+        // {price==='Free' ? setShippingprice(prev=>prev+0) : setShippingprice(prev=>prev + price)}
+        const updatedcart=cart.map((item,i)=>itemIndex===i ? {...item,shippingprice:price} : item)
+        setCart(updatedcart)
+
+        
     }
     const deletef = (product,index) => {
         setCart(cart.filter((_, i) => i !== index))
@@ -62,6 +67,10 @@ function Cart() {
         setTotalprice(prev=>(prev-(oldqty * product.price)) + (Number(changequantity) * product.price))
 
     }
+    const shippingprice = cart.reduce(
+  (total, item) => total + (item.shippingprice || 0),0
+)
+    console.log(shippingprice)
     return (
         <div className="cart-page">
             <div className='nav-container'>
@@ -106,19 +115,18 @@ function Cart() {
                                         <p className='delivery-options-title'>Choose delivery date</p>
                                         {deliveryOptions.map((opt) => {
                                             const isSelected = (selectedDelivery[index] ?? 'standard') === opt.id
-                                            setShippingprice(isSelected ? (opt.price === 'Free' ? 0 : parseFloat(opt.price)) : shippingprice)
-                                            
+    
                                             return (
                                                 <button
                                                     key={opt.id}
                                                     type='button'
                                                     className={`delivery-option ${isSelected ? 'selected' : ''}`}
-                                                    onClick={() => selectDelivery(index, opt.id)}
+                                                    onClick={() => selectDelivery(opt.price,index, opt.id)}
                                                 >
                                                     <span className='delivery-option-date'>{opt.date}</span>
                                                     <span className='delivery-option-label'>{opt.label}</span>
                                                     <span className='delivery-option-desc'>{opt.desc}</span>
-                                                    <span className='delivery-option-price'>{opt.price}</span>
+                                                    <span className='delivery-option-price'>{opt.price === 0 ? 'Free' : `$${opt.price}`}</span>
                                                 </button>
                                             )
                                         })}
@@ -129,7 +137,7 @@ function Cart() {
                 <div className='total-container'>
                         <h1 className='payment-summary'>Payment Summary</h1>
                         <h2 className='summary-row'>Items({count}): ${totalprice.toFixed(2)}</h2>
-                        <h2 className='summary-row'>Shipping &amp; handling: $9</h2>
+                        <h2 className='summary-row'>Shipping &amp; handling: {shippingprice===0 ? 'Free' : `$${shippingprice}`}</h2>
                         <h2 className='summary-row'>Total before tax: $105</h2>
                         <h2 className='summary-row'>Estimated tax: 10%</h2>
                         <hr className='summary-divider' />
