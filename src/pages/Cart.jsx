@@ -1,5 +1,5 @@
 import './cart.css'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useMemo, useState } from 'react'
 import { api, cartapi,totalpriceapi,selectedapi} from '../Context.jsx'
 import { Link } from 'react-router-dom'
 function Cart() {
@@ -7,7 +7,6 @@ function Cart() {
     const { cart, setCart } = useContext(cartapi);
     const [showbutton, setShowbutton] = useState(null)
     const [changequantity, setChangequantity] = useState(null)
-    // const [selectedDelivery, setSelectedDelivery] = useState({})
     const {totalprice,setTotalprice}=useContext(totalpriceapi)
     const {isSelected,setIsSelected}=useContext(selectedapi)
     let nextday=new Date()
@@ -35,10 +34,10 @@ function Cart() {
     day: "numeric"
   })}`, desc: '1 business day', price: 12.99 },
     ]
-    const selectDelivery = (itemIndex, optionId) => {
+    const selectDelivery = (price,itemIndex, optionId) => {
         setIsSelected(prev => ({ ...prev, [itemIndex]: optionId }))
-        // const updatedcart=cart.map((item,i)=>itemIndex===i ? {...item,shippingprice : price} : item)
-        // setCart(updatedcart)
+        const updatedcart=cart.map((item,i)=>itemIndex===i ? {...item,shippingprice : price} : item)
+        setCart(updatedcart)
 
         
     }
@@ -67,6 +66,10 @@ function Cart() {
         setTotalprice(prev=>(prev-(oldqty * product.price)) + (Number(changequantity) * product.price))
     }
     useEffect(()=>{console.log(cart)},[cart])
+    const totalshippingprice=useMemo(()=>cart.reduce((previtem,currentitem)=>{return previtem + (currentitem.shippingprice || 0)},0),[cart])
+    const totalbeforetax=useMemo(()=>{return (totalshippingprice+totalprice)},[totalshippingprice,totalprice])
+    const totalaftertax=useMemo(()=>{return totalbeforetax * (10/100)},[totalbeforetax])
+    const ordertotal=useMemo(()=>{return totalaftertax + totalbeforetax},[totalaftertax,totalbeforetax])
     return (
         <div className="cart-page">
             <div className='nav-container'>
@@ -116,7 +119,7 @@ function Cart() {
                                                     key={opt.id}
                                                     type='button'
                                                     className={`delivery-option ${selected ? 'selected' : ''}`}
-                                                    onClick={() => selectDelivery(index, opt.id)}
+                                                    onClick={() => selectDelivery(opt.price,index, opt.id)}
                                                 >
                                                     <span className='delivery-option-date'>{opt.date}</span>
                                                     <span className='delivery-option-label'>{opt.label}</span>
@@ -129,16 +132,18 @@ function Cart() {
                                 </div>
                             </div>))}
                 </div>
+                {count > 0 &&
                 <div className='total-container'>
                         <h1 className='payment-summary'>Payment Summary</h1>
                         <h2 className='summary-row'>Items({count}): ${totalprice.toFixed(2)}</h2>
-                        <h2 className='summary-row'>Shipping &amp; handling: {0}</h2>
-                        <h2 className='summary-row'>Total before tax: $105</h2>
-                        <h2 className='summary-row'>Estimated tax: 10%</h2>
+                        <h2 className='summary-row'>Shipping &amp; handling: ${totalshippingprice.toFixed(2)}</h2>
+                        <h2 className='summary-row'>Total before tax: {totalbeforetax.toFixed(2)}</h2>
+                        <h2 className='summary-row'>Estimated tax (10%): {totalaftertax.toFixed(2)}</h2>
                         <hr className='summary-divider' />
-                        <h2 className='order-total'>Order total: $105.23</h2>
+                        <h2 className='order-total'>Order total: ${ordertotal.toFixed(2)}</h2>
                         <button className='place-order'>Place Your Order</button>
                 </div>
+                }
             </div>
         </div>
     )
