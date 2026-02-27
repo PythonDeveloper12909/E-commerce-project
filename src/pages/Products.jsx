@@ -46,9 +46,6 @@ function Products() {
       setTotalprice(prev=>prev + (product.price * quantity))
     }
   }
-  useEffect(()=>{
-    console.log(totalprice)
-  },[totalprice])
   const filteredproducts = products.filter(product => product.title.toLowerCase().includes(inpval.toLowerCase()))
   return (
     <>

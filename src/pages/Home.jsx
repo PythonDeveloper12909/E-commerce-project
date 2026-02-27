@@ -19,8 +19,8 @@ function Home() {
           <button className='butt' onClick={()=>change()}>Submit</button>
         </div>
         <ul className='container'>
-          <li className='li'>Orders</li>
-          <li className='li'><Link to="/cart">🛒Cart {count > 0 ? count : null}</Link></li>
+          <li className='li'><Link to='/orders'>Orders</Link></li>
+          <li className='li'><Link to='/cart'>🛒Cart {count > 0 ? count : null}</Link></li>
         </ul>
       </nav>
       <inputvalue.Provider value={{inpval,setInpval}}>

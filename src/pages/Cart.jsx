@@ -1,6 +1,6 @@
 import './cart.css'
 import { useContext, useEffect, useMemo, useState } from 'react'
-import { api, cartapi,totalpriceapi,selectedapi} from '../Context.jsx'
+import { api, cartapi,totalpriceapi} from '../Context.jsx'
 import { Link } from 'react-router-dom'
 function Cart() {
     const { count, setCount } = useContext(api);
@@ -8,7 +8,6 @@ function Cart() {
     const [showbutton, setShowbutton] = useState(null)
     const [changequantity, setChangequantity] = useState(null)
     const {totalprice,setTotalprice}=useContext(totalpriceapi)
-    const {isSelected,setIsSelected}=useContext(selectedapi)
     let nextday=new Date()
     nextday.setDate(nextday.getDate()+1)
     let express=new Date()
@@ -35,8 +34,8 @@ function Cart() {
   })}`, desc: '1 business day', price: 12.99 },
     ]
     const selectDelivery = (price,itemIndex, optionId) => {
-        setIsSelected(prev => ({ ...prev, [itemIndex]: optionId }))
-        const updatedcart=cart.map((item,i)=>itemIndex===i ? {...item,shippingprice : price} : item)
+        // setIsSelected(prev => ({ ...prev, [itemIndex]: optionId }))
+        const updatedcart=cart.map((item,i)=>itemIndex===i ? {...item,shippingprice : price,selectedoption : optionId} : item)
         setCart(updatedcart)
 
         
@@ -46,8 +45,7 @@ function Cart() {
         setCount(c => c - cart[index].qty)
         setShowbutton(null)
         setTotalprice(prev=>prev-(product.qty * product.price))
-        localStorage.removeItem('selected')
-        setIsSelected({})
+        
     }
     const update = (index) => {
         setShowbutton(index)
@@ -65,7 +63,6 @@ function Cart() {
         setCount(c => (c - oldqty) + Number(changequantity))
         setTotalprice(prev=>(prev-(oldqty * product.price)) + (Number(changequantity) * product.price))
     }
-    useEffect(()=>{console.log(cart)},[cart])
     const totalshippingprice=useMemo(()=>cart.reduce((previtem,currentitem)=>{return previtem + (currentitem.shippingprice || 0)},0),[cart])
     const totalbeforetax=useMemo(()=>{return (totalshippingprice+totalprice)},[totalshippingprice,totalprice])
     const totalaftertax=useMemo(()=>{return totalbeforetax * (10/100)},[totalbeforetax])
@@ -88,7 +85,7 @@ function Cart() {
                         p === null ? null : (
                             <div className='p-s-container' key={p.id}>
                                 <p className='delivery-date'>📦 Delivery by <span>{deliveryOptions.map((opt)=>{
-                                    const isselected=(isSelected[index] ?? 'standard') === opt.id
+                                    const isselected=(cart[index].selectedoption ?? 'standard') === opt.id
                                     return(isselected ? opt.date : '')
                                 })}</span></p>
                                 <div className='product-row'>
@@ -113,7 +110,7 @@ function Cart() {
                                     <div className='delivery-options'>
                                         <p className='delivery-options-title'>Choose delivery date</p>
                                         {deliveryOptions.map((opt) => {
-                                            const selected = (isSelected[index] ?? 'standard') === opt.id
+                                            const selected = (cart[index].selectedoption ?? 'standard') === opt.id
                                             return (
                                                 <button
                                                     key={opt.id}
@@ -141,7 +138,7 @@ function Cart() {
                         <h2 className='summary-row'>Estimated tax (10%): {totalaftertax.toFixed(2)}</h2>
                         <hr className='summary-divider' />
                         <h2 className='order-total'>Order total: ${ordertotal.toFixed(2)}</h2>
-                        <button className='place-order'>Place Your Order</button>
+                        <Link to='/orders'><button className='place-order'>Place Your Order</button></Link>
                 </div>
                 }
             </div>
