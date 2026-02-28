@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext,createContext} from "react";
-import { api, cartapi,totalpriceapi } from '../Context.jsx'
-import { inputvalue } from './Home.jsx'
+import { api, cartapi,totalpriceapi,inputvalue } from '../Context.jsx'
 function Products() {
   const [products, setProducts] = useState([]);
   const { count, setCount } = useContext(api);

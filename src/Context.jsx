@@ -2,6 +2,7 @@ import { createContext, useState, useEffect} from "react";
 export const api = createContext()
 export const cartapi=createContext()
 export const totalpriceapi=createContext()
+export const inputvalue=createContext()
 function Context({ children }) {
     const [count, setCount] = useState(()=>{
         const saved=localStorage.getItem('count')
@@ -22,6 +23,7 @@ function Context({ children }) {
         const saved=localStorage.getItem('totalprice')
         return saved ? JSON.parse(saved) : 0;
     })
+    const [inpval,setInpval]=useState('')
     useEffect(()=>{
         localStorage.setItem('count',JSON.stringify(count))
     },[count])
@@ -36,7 +38,9 @@ function Context({ children }) {
             <api.Provider value={{ count, setCount}}>
                 <cartapi.Provider value={{cart,setCart}}>
                     <totalpriceapi.Provider value={{totalprice,setTotalprice}}>
+                        <inputvalue.Provider value={{inpval,setInpval}}>
                             {children}
+                        </inputvalue.Provider>
                     </totalpriceapi.Provider>
                 </cartapi.Provider>
             </api.Provider>
