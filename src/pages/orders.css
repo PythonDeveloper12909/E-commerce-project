@@ -1,0 +1,51 @@
+/* ===== NAVBAR ===== */
+.orders-nav {
+  display: flex;
+  align-items: center;
+  padding: 1rem 3rem;
+  background: #111827;
+  color: white;
+  gap: 2rem; /* space between elements */
+}
+
+/* ===== LOGO ===== */
+.ecome {
+  font-size: 1.8rem;
+  font-weight: 700;
+  white-space: nowrap; /* prevent shrinking */
+}
+
+/* ===== SEARCH INPUT (TAKES ALL AVAILABLE SPACE) ===== */
+.orders-inp {
+  flex: 1;              /* THIS makes it take remaining space */
+  padding: 0.7rem 1rem;
+  border-radius: 25px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  white-space: nowrap; 
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.2rem;
+  transition: 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: #38bdf8;
+}
+.orders-label {
+  margin-left: 200px;   
+  margin-top: 50px;
+  font-size: 2rem;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  
+}
