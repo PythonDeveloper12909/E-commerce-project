@@ -76,8 +76,6 @@ function Cart() {
   ];
   const updateorderhistory = () => {
     const itemsSnapshot = [...cart];
-    console.log("cart at time of order:", cart);
-    console.log("cart length:", cart.length);
     const newOrder = {
       orderid: crypto.randomUUID(),
       orderdate: currentdate,
@@ -127,9 +125,6 @@ function Cart() {
         prev - oldqty * product.price + Number(changequantity) * product.price,
     );
   };
-  useEffect(() => {
-    console.log(orderhistory);
-  }, [orderhistory]);
   return (
     <div className="cart-page">
       <div className="nav-container">

@@ -9,6 +9,10 @@ function Orders() {
   // const sortedorders = orderhistory.sort((a, b) => {
   //   new Date(b.date) - new Date(a.date);
   // });
+  useEffect(() => {
+    console.log(orderhistory);
+  }, [orderhistory]);
+  const clearorderhistory = () => {};
   return (
     <>
       <Navbar />
@@ -47,6 +51,12 @@ function Orders() {
               </div>
             ))}
           </div>
+          <button
+            onClick={() => clearorderhistory()}
+            className="clearorderhistorybutt"
+          >
+            Clear OrderHistory
+          </button>
         </>
       ) : (
         <Products />
