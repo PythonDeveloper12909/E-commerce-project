@@ -6,13 +6,12 @@ import { inputvalue, orderhistoryapi } from "../Context.jsx";
 function Orders() {
   const { inpval } = useContext(inputvalue);
   const { orderhistory, setOrderhistory } = useContext(orderhistoryapi);
-  // const sortedorders = orderhistory.sort((a, b) => {
-  //   new Date(b.date) - new Date(a.date);
-  // });
   useEffect(() => {
     console.log(orderhistory);
   }, [orderhistory]);
-  const clearorderhistory = () => {};
+  const clearorderhistory = () => {
+    setOrderhistory([]);
+  };
   return (
     <>
       <Navbar />
@@ -21,17 +20,17 @@ function Orders() {
           <div className="orders-page">
             <h1 className="orders-label">Your Orders</h1>
 
-            {orderhistory.map((product, index) => (
+            {orderhistory.map((history, index) => (
               <div className="orders-card" key={index}>
                 <div className="orders-header">
                   <div className="left-wing">
                     <div className="orders-placed">
                       <p className="placed-label">Order Placed:</p>
-                      <p className="placed-date">{product.date}</p>
+                      <p className="placed-date">{history.orderdate}</p>
                     </div>
                     <div className="orders-total">
                       <p className="total-label">Total:</p>
-                      <p className="total-amount">$56.8</p>
+                      <p className="total-amount">{history.Ordertotal}</p>
                     </div>
                   </div>
                   <div className="right-wing">

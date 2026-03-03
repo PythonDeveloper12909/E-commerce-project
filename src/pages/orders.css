@@ -104,4 +104,9 @@
   position: fixed;
   bottom: 10px;
   left: 10px;
+  cursor: pointer;
+
+}
+.clearorderhistorybutt:hover{
+  background-color: hsl(120, 50%, 20%);
 }

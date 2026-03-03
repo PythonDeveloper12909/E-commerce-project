@@ -84,6 +84,8 @@ function Cart() {
     };
     setOrderhistory((prev) => [...prev, newOrder]);
     setCart([]);
+    setCount(0);
+    setTotalprice(0);
   };
   const selectDelivery = (date, price, itemIndex, optionId) => {
     const updatedcart = cart.map((item, i) =>
