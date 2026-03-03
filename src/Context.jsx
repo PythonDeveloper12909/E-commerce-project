@@ -3,6 +3,7 @@ export const api = createContext()
 export const cartapi=createContext()
 export const totalpriceapi=createContext()
 export const inputvalue=createContext()
+export const orderhistoryapi=createContext()
 function Context({ children }) {
     const [count, setCount] = useState(()=>{
         const saved=localStorage.getItem('count')
@@ -24,6 +25,10 @@ function Context({ children }) {
         return saved ? JSON.parse(saved) : 0;
     })
     const [inpval,setInpval]=useState('')
+    const [orderhistory,setOrderhistory]=useState(()=>{
+        const saved_history=localStorage.getItem('orderhistory')
+        return saved_history ? JSON.parse(saved_history) : [];
+    })
     useEffect(()=>{
         localStorage.setItem('count',JSON.stringify(count))
     },[count])
@@ -33,13 +38,18 @@ function Context({ children }) {
     useEffect(()=>{
         localStorage.setItem('totalprice',JSON.stringify(totalprice))
     },[totalprice])
+    useEffect(()=>{
+        localStorage.setItem('orderhistory',JSON.stringify(orderhistory))
+    },[orderhistory])
     return (
         <>
             <api.Provider value={{ count, setCount}}>
                 <cartapi.Provider value={{cart,setCart}}>
                     <totalpriceapi.Provider value={{totalprice,setTotalprice}}>
                         <inputvalue.Provider value={{inpval,setInpval}}>
-                            {children}
+                           <orderhistoryapi.Provider value={{orderhistory,setOrderhistory}}>                        
+                                {children}
+                           </orderhistoryapi.Provider>
                         </inputvalue.Provider>
                     </totalpriceapi.Provider>
                 </cartapi.Provider>

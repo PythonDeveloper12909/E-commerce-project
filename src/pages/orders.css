@@ -1,5 +1,96 @@
 .orders-label {
   font-family: Arial, Helvetica, sans-serif;
-  margin: 50px;
-  margin-left: 200px;
+  font-size: 1.8rem;
+  width: 800px;
+  max-width: 90%;
+  margin: 20px auto 0;   /* sits just above card, centered container */
+  text-align: left;      /* text flush to left of card */
+}
+
+.orders-header{
+  display: flex;
+  border-bottom: 1px solid rgb(222,222,222);
+  justify-content: space-between;
+  padding: 1.5rem;
+}
+
+.orders-card{
+  border: 1px solid rgb(222,222,222);
+  width: 800px;
+  max-width: 90%;
+  margin: 10px auto 0;   
+  border-radius: 5px;
+}
+
+.left-wing{
+  display: flex;
+  gap: 50px;
+}
+
+.right-wing{
+  display: flex;
+  flex-direction: column;
+}
+
+.orders-page{
+  width: fit-content;
+  margin: auto;
+}
+
+
+.placed-label,
+.total-label,
+.id-label {
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.placed-date,
+.total-amount,
+.id-value {
+  font-size: 1.1rem;
+  color: #333;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.orders-placed,
+.orders-total,
+.right-wing {
+  margin-bottom: 0.5rem;
+}
+.orders-card-container{
+  display: flex;
+  gap:50px;
+  align-items: center;
+}
+.card-text{
+  display: flex;
+  flex-direction: column;
+  font-size: 1.05rem;
+  gap:2px;
+}
+
+.orders-card-container img{
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.item-name{
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.add_to_cart{
+  background-color:green ;
+  font-size: 1.1rem;
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  margin-top: 5px;
+  cursor: pointer;
+  max-width: 200px;
+}
+.add_to_cart:hover{
+  background-color:hsl(120, 40%, 25%) ;
 }
