@@ -3,15 +3,17 @@ import { useContext, useEffect } from "react";
 import Navbar from "../Navbar.jsx";
 import Products from "./Products.jsx";
 import { inputvalue, orderhistoryapi } from "../Context.jsx";
+import React from "react";
 function Orders() {
   const { inpval } = useContext(inputvalue);
   const { orderhistory, setOrderhistory } = useContext(orderhistoryapi);
-  useEffect(() => {
-    console.log(orderhistory);
-  }, [orderhistory]);
+  const sortedhistory = [...orderhistory].reverse();
   const clearorderhistory = () => {
     setOrderhistory([]);
   };
+  useEffect(() => {
+    console.log(sortedhistory);
+  }, [sortedhistory]);
   return (
     <>
       <Navbar />
@@ -19,8 +21,7 @@ function Orders() {
         <>
           <div className="orders-page">
             <h1 className="orders-label">Your Orders</h1>
-
-            {orderhistory.map((history, index) => (
+            {sortedhistory.map((history, index) => (
               <div className="orders-card" key={index}>
                 <div className="orders-header">
                   <div className="left-wing">
@@ -35,17 +36,26 @@ function Orders() {
                   </div>
                   <div className="right-wing">
                     <p className="id-label">Order ID:</p>
-                    <p className="id-value">a4fasd45-23dd3-4d</p>
+                    <p className="id-value">{history.orderid}</p>
                   </div>
                 </div>
                 <div className="orders-card-container">
-                  <img src={product.thumbnail} alt={product.title} />
-                  <div className="card-text">
-                    <p className="item-name">{product.title}</p>
-                    <p className="arrival-info">Arriving on: {product.date}</p>
-                    <p className="quantity-info">Quantity: {product.qty}</p>
-                    <button className="add_to_cart">Add to cart</button>
-                  </div>
+                  {history.items.map((item, index) => (
+                    <React.Fragment key={index}>
+                      <div className="each-align">
+                        <img src={item.thumbnail} alt={item.title} />
+                        <div className="card-text">
+                          <p className="item-name">{item.title}</p>
+                          <p className="arrival-info">
+                            Arriving on: {item.shippingdate}
+                          </p>
+                          <p className="quantity-info">Quantity: {item.qty}</p>
+                        </div>
+                        <button className="add_to_cart">Add to cart</button>
+                        <button className="tracking">Track Package</button>
+                      </div>
+                    </React.Fragment>
+                  ))}
                 </div>
               </div>
             ))}
@@ -54,7 +64,7 @@ function Orders() {
             onClick={() => clearorderhistory()}
             className="clearorderhistorybutt"
           >
-            Clear OrderHistory
+            Clear Orderhistory
           </button>
         </>
       ) : (

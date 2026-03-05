@@ -1,5 +1,12 @@
 import "./cart.css";
-import { useContext, useEffect, useMemo, useState, createContext } from "react";
+import {
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+  createContext,
+  useRef,
+} from "react";
 import { api, cartapi, totalpriceapi, orderhistoryapi } from "../Context.jsx";
 import { Link } from "react-router-dom";
 function Cart() {
@@ -9,6 +16,20 @@ function Cart() {
   const [changequantity, setChangequantity] = useState(null);
   const { totalprice, setTotalprice } = useContext(totalpriceapi);
   const { orderhistory, setOrderhistory } = useContext(orderhistoryapi);
+  const inisitialised = useRef(false);
+  useEffect(() => {
+    if (!inisitialised.current) {
+      inisitialised.current = true;
+      const defaultopt = deliveryOptions.find((opt) => opt.id === "standard");
+      const newCart = cart.map((item) => ({
+        ...item,
+        shippingprice: defaultopt.price,
+        selectedoption: "standard",
+        shippingdate: defaultopt.date,
+      }));
+      setCart(newCart);
+    }
+  }, []);
   const totalshippingprice = useMemo(
     () =>
       cart.reduce((previtem, currentitem) => {
@@ -127,6 +148,9 @@ function Cart() {
         prev - oldqty * product.price + Number(changequantity) * product.price,
     );
   };
+  useEffect(() => {
+    console.log(orderhistory);
+  }, [orderhistory]);
   return (
     <div className="cart-page">
       <div className="nav-container">

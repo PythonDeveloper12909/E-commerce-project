@@ -16,15 +16,16 @@
 
 .orders-card{
   border: 1px solid rgb(222,222,222);
-  width: 800px;
-  max-width: 90%;
+  width: 810px;
+  max-width: 100%;
   margin: 10px auto 0;   
   border-radius: 5px;
+  padding: 15px;
 }
 
 .left-wing{
   display: flex;
-  gap: 50px;
+  gap: 25px;
 }
 
 .right-wing{
@@ -44,6 +45,7 @@
   font-size: 1rem;
   font-weight: 600;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  width: fit-content;
 }
 
 .placed-date,
@@ -52,23 +54,26 @@
   font-size: 1.1rem;
   color: #333;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  width: fit-content;
 }
 
 .orders-placed,
 .orders-total,
 .right-wing {
   margin-bottom: 0.5rem;
+  width: fit-content;
 }
 .orders-card-container{
   display: flex;
   gap:50px;
-  align-items: center;
+  flex-direction: column;
 }
 .card-text{
   display: flex;
   flex-direction: column;
   font-size: 1.05rem;
   gap:2px;
+  width: fit-content;
 }
 
 .orders-card-container img{
@@ -80,6 +85,10 @@
 .item-name{
   font-size: 1.2rem;
   font-weight: bold;
+  width: fit-content;
+}
+.arrival-info{
+  width: fit-content;
 }
 .add_to_cart{
   background-color:green ;
@@ -90,6 +99,10 @@
   margin-top: 5px;
   cursor: pointer;
   max-width: 200px;
+  margin-left:10px;
+}
+.quantity-info{
+  width: fit-content;
 }
 .add_to_cart:hover{
   background-color:hsl(120, 40%, 25%) ;
@@ -109,4 +122,21 @@
 }
 .clearorderhistorybutt:hover{
   background-color: hsl(120, 50%, 20%);
+}
+.each-align{
+  display: flex;
+  align-items: center;
+}
+.tracking{
+  color: rgb(33, 33, 33);
+  background: white;
+  border: 1px solid rgb(200, 200, 200);
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(220, 220, 220, 0.2);
+  width: 200px;
+  max-width: 250px;
+  font-size: 1rem;
+  padding: 5px;
+  margin-left: 55px;
 }
