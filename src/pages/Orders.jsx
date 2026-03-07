@@ -1,5 +1,6 @@
 import "./orders.css";
 import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Navbar from "../Navbar.jsx";
 import Products from "./Products.jsx";
 import { inputvalue, orderhistoryapi } from "../Context.jsx";
@@ -52,7 +53,9 @@ function Orders() {
                           <p className="quantity-info">Quantity: {item.qty}</p>
                         </div>
                         <button className="add_to_cart">Add to cart</button>
-                        <button className="tracking">Track Package</button>
+                        <Link to="/tracking">
+                          <button className="tracking">Track Package</button>
+                        </Link>
                       </div>
                     </React.Fragment>
                   ))}
