@@ -3,14 +3,24 @@ import { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Navbar from "../Navbar.jsx";
 import Products from "./Products.jsx";
-import { inputvalue, orderhistoryapi } from "../Context.jsx";
+import {
+  inputvalue,
+  cartapi,
+  orderhistoryapi,
+  tracked_product_api,
+} from "../Context.jsx";
 import React from "react";
 function Orders() {
   const { inpval } = useContext(inputvalue);
+  const { cart, setCart } = useContext(cartapi);
   const { orderhistory, setOrderhistory } = useContext(orderhistoryapi);
+  const { trackedproduct, setTrackedproduct } = useContext(tracked_product_api);
   const sortedhistory = [...orderhistory].reverse();
   const clearorderhistory = () => {
     setOrderhistory([]);
+  };
+  const tracking_check = (index, product) => {
+    setTrackedproduct([product]);
   };
   useEffect(() => {
     console.log(sortedhistory);
@@ -54,7 +64,12 @@ function Orders() {
                         </div>
                         <button className="add_to_cart">Add to cart</button>
                         <Link to="/tracking">
-                          <button className="tracking">Track Package</button>
+                          <button
+                            className="tracking"
+                            onClick={() => tracking_check(index, item)}
+                          >
+                            Track Package
+                          </button>
                         </Link>
                       </div>
                     </React.Fragment>

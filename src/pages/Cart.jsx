@@ -96,12 +96,13 @@ function Cart() {
     },
   ];
   const updateorderhistory = () => {
-    const itemsSnapshot = [...cart];
+    const updated_cart = cart.map((item, i) => ({ ...item, trackingID: i }));
+    setCart(updated_cart);
     const newOrder = {
       orderid: crypto.randomUUID(),
       orderdate: currentdate,
       Ordertotal: ordertotal.toFixed(2),
-      items: itemsSnapshot,
+      items: updated_cart,
     };
     setOrderhistory((prev) => [...prev, newOrder]);
     setCart([]);
