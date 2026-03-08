@@ -1,0 +1,65 @@
+.link-to-orders {
+  display: inline-block;
+  color: black;
+  text-decoration: underline;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  margin-left: 200px;
+  width: fit-content;
+}
+.link-to-orders:active {
+  color: blue;
+}
+.link-to-orders:hover {
+  color: darkblue;
+}
+.arrive {
+  margin-left: 200px;
+  margin-top: 50px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.title-track {
+  margin-left: 200px;
+  color: black;
+  margin-top: 20px;
+  font-weight: 400;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.track-qty {
+  margin-left: 200px;
+  color: black;
+  font-weight: 400;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+.track-img {
+  max-width: 150px;
+  max-height: 150px;
+  margin-top: 25px;
+  margin-bottom: 50px;
+  margin-left: 200px;
+}
+.main-progress-container{
+    display: flex;
+    flex-direction: column;
+    margin-left: 20%;
+}
+.progress-bar-labels{
+    display: flex;
+    gap:300px;
+    font-size: 1.5rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: fit-content;
+}
+.progress-bar-container{
+    width:930px;
+    height: 30px;
+    border-radius: 15px;
+    border: none;
+    overflow: hidden;
+    border: 1px solid black;
+}
+.progress-bar{
+    background-color: green;
+    height: 100%;
+
+}
