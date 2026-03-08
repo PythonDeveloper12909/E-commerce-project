@@ -63,3 +63,31 @@
     height: 100%;
 
 }
+@media (max-width: 1200px) {
+  .progress-bar-container {
+    width: 100%;
+  }
+  .progress-bar-labels {
+    gap: 15rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .progress-bar-labels {
+    gap: 10rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .progress-bar-labels {
+    gap: 5rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .progress-bar-labels {
+    gap: 2.5rem;
+    font-size: 1rem;
+  }
+}

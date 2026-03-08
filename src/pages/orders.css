@@ -140,3 +140,117 @@
   padding: 5px;
   margin-left: 55px;
 }
+@media (max-width: 900px) {
+  .orders-label {
+    width: 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+    font-size: 1.6rem;
+  }
+  .orders-card {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  .orders-page {
+    width: 100%;
+    padding: 0 0 4rem;
+  }
+  .tracking {
+    font-size: 0.9rem;
+    width: auto;
+    max-width: 140px;
+    margin-left: 10px;
+  }
+  .add_to_cart {
+    max-width: 140px;
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .orders-label {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+  }
+  .orders-card {
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+  .orders-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1rem;
+  }
+  .left-wing {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .orders-card-container {
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+  .each-align {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .orders-card-container img {
+    width: 120px;
+    height: 120px;
+  }
+  .add_to_cart,
+  .tracking {
+    margin-left: 0;
+    margin-top: 0.5rem;
+  }
+  .clearorderhistorybutt {
+    font-size: 1rem;
+    padding: 8px 12px;
+    max-width: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .orders-label {
+    font-size: 1.3rem;
+    margin-left: 0.75rem;
+    margin-right: 0.75rem;
+  }
+  .orders-card {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.75rem;
+  }
+  .orders-header {
+    padding: 0.75rem;
+  }
+  .placed-label,
+  .total-label,
+  .id-label {
+    font-size: 0.9rem;
+  }
+  .placed-date,
+  .total-amount,
+  .id-value {
+    font-size: 1rem;
+  }
+  .item-name {
+    font-size: 1.05rem;
+  }
+  .add_to_cart,
+  .tracking {
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 100%;
+    padding: 8px;
+  }
+  .clearorderhistorybutt {
+    font-size: 0.95rem;
+    padding: 8px 10px;
+    max-width: 160px;
+  }
+}

@@ -58,6 +58,9 @@ function Tracking() {
     const total = shipping - orderdate;
     const elapsed = today - orderdate;
     const ratio = elapsed / total;
+    if (ratio===0.5){
+      return 50
+    }
     return ratio < 0.5 ? 33 : 66; // preparing or shipped
   };
   useEffect(() => {

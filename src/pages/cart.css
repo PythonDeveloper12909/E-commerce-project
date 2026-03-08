@@ -349,3 +349,126 @@
 .place-order:active {
     transform: scale(0.98);
 }
+
+/* ===========================
+   Responsive Layout
+   =========================== */
+
+@media (max-width: 1024px) {
+    .review {
+        margin-left: 4rem;
+    }
+
+    .main-showcase {
+        margin-left: 4rem;
+        gap: 1.5rem;
+    }
+
+    .p-s-container {
+        width: 100%;
+        max-width: 900px;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+        padding: 0 1rem;
+    }
+
+    .center-nav {
+        position: static;
+        transform: none;
+        justify-content: flex-start;
+    }
+
+    .right-nav {
+        margin-right: 0;
+        width: 100%;
+        justify-content: flex-end;
+        padding-right: 1rem;
+    }
+
+    .h1,
+    .orders {
+        font-size: 1.8rem;
+        text-align: left;
+    }
+
+    .navigation {
+        font-size: 1.6rem;
+    }
+
+    .review {
+        margin-left: 1.5rem;
+        margin-top: 4rem;
+        font-size: 1.8rem;
+    }
+
+    .main-showcase {
+        flex-direction: column;
+        margin-left: 0;
+        margin-top: 1.5rem;
+        padding: 0 1rem 1.5rem;
+        align-items: stretch;
+    }
+
+    .p-s-container {
+        width: 100%;
+        margin: 0 auto 1rem;
+        box-sizing: border-box;
+    }
+
+    .product-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .image {
+        width: 140px;
+        height: 140px;
+    }
+
+    .delivery-options {
+        width: 100%;
+        min-width: 0;
+        margin-top: 0.75rem;
+    }
+
+    .total-container {
+        width: 100%;
+        max-width: 480px;
+        margin: 0 auto 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .review {
+        margin-left: 1rem;
+        font-size: 1.6rem;
+    }
+
+    .delivery-date {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+
+    .tit {
+        font-size: 1.2rem;
+    }
+
+    .pr {
+        font-size: 1.3rem;
+    }
+
+    .quant-container h3 {
+        font-size: 1rem;
+    }
+
+    .place-order {
+        font-size: 1rem;
+        padding: 0.75rem 0.9rem;
+    }
+}
